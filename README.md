@@ -1,2 +1,3 @@
-# vite-boilerplate
-Boilerplate Vite
+# my-contacts-client
+
+My Contacts Client
