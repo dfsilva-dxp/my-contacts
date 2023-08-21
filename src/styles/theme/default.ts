@@ -1,11 +1,7 @@
 const theme = {
   grid: {
     container: {
-      sm: "33.75rem",
-      md: "45rem",
-      lg: "60rem",
-      xlg: "71.25rem",
-      xxlg: "82.5rem"
+      default: "31.25rem"
     }
   },
   border: {
