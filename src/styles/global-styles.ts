@@ -55,7 +55,7 @@ ${({ theme }) => css`
   }
   a,
   p {
-    font-size: ${theme.font.sizes.medium};
+    font-size: 0.875rem;
   }
   button {
     cursor: pointer;
