@@ -5,9 +5,9 @@ import * as S from "./styles";
 const ContactsHeader = () => {
   return (
     <S.ContactHeaderContent>
-      <span>3 contatos</span>
+      <strong>3 contatos</strong>
 
-      <Button as="a" size="small">
+      <Button as="a" size="small" variant="ghost">
         Novo contato
       </Button>
     </S.ContactHeaderContent>

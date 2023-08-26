@@ -7,11 +7,10 @@ export const ContactHeaderContent = styled.header`
     justify-content: space-between;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid ${theme.colors.gray200};
+    border-bottom: 1px solid ${theme.colors.gray[200]};
 
-    span {
+    strong {
       font-size: 1.5rem;
-      font-weight: ${theme.font.weight.bold};
       line-height: normal;
     }
   `}
