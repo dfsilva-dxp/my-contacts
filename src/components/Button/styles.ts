@@ -7,11 +7,16 @@ export const ButtonContent = styled.button<ButtonContentProps>`
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 0.5rem;
     border: 2px solid transparent;
     border-radius: 0.25rem;
     flex-shrink: 0;
     font-weight: ${theme.font.weight.bold};
     transition: all 0.15s ease-in-out;
+
+    svg {
+      line-height: 1;
+    }
 
     ${!!variant && buttonVariants[variant](theme)}
     ${!!size && buttonVariants[size]}
@@ -30,6 +35,7 @@ const buttonVariants = {
   `,
   neutral: (theme: DefaultTheme) => css`
     background-color: transparent;
+    color: ${theme.colors.primary.dark};
 
     &:hover,
     &:active {
