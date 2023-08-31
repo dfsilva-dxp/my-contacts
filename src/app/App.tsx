@@ -1,6 +1,6 @@
 import { ThemeProvider } from "styled-components";
 
-import { Container, Header } from "@/components";
+import { ContactsList, Container, Header } from "@/components";
 
 import { DefaultTheme, GlobalStyles } from "@/styles";
 
@@ -10,6 +10,7 @@ function App() {
       <GlobalStyles />
       <Container>
         <Header hasSearchForm />
+        <ContactsList />
       </Container>
     </ThemeProvider>
   );

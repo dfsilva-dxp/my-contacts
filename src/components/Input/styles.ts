@@ -19,13 +19,13 @@ export const InputContent = styled.div<InputContentProps>`
     width: 31.25rem;
     height: 3.125rem;
     padding: 0.5rem 1rem;
-    background: ${theme.colors.whiteMain};
+    background: ${theme.colors.white};
     border: 2px solid transparent;
 
     flex-shrink: 0;
 
     &:focus-within {
-      border-color: ${theme.colors.primaryMain};
+      border-color: ${theme.colors.primary.main};
     }
 
     ${!!borderRadius && variant[borderRadius]}
@@ -43,7 +43,7 @@ export const Input = styled.input`
     height: 100%;
 
     &::placeholder {
-      color: ${theme.colors.gray200};
+      color: ${theme.colors.gray[200]};
     }
   `}
 `;
@@ -51,8 +51,8 @@ export const Input = styled.input`
 export const Error = styled.p`
   ${({ theme }) => css`
     padding: 0.5rem 1rem;
-    font-size: ${theme.font.sizes.xsmall};
-    color: ${theme.colors.dangerMain};
+    font-size: 0.875rem;
+    color: ${theme.colors.danger.main};
     font-weight: ${theme.font.weight.bold};
   `}
 `;

@@ -19,7 +19,7 @@ ${({ theme }) => css`
   html,
   body {
     background: ${theme.colors.background};
-    color: ${theme.colors.text};
+    color: ${theme.colors.gray[900]};
     transition: background 0.15s ease-in-out;
   }
   body {
@@ -43,7 +43,7 @@ ${({ theme }) => css`
   select,
   button {
     font: 400 1rem ${theme.font.family}, sans-serif;
-    color: ${theme.colors.text};
+    color: ${theme.colors.gray[900]};
     transition: color 0.15s ease-in-out;
   }
   span {
@@ -55,7 +55,7 @@ ${({ theme }) => css`
   }
   a,
   p {
-    font-size: ${theme.font.sizes.medium};
+    font-size: 0.875rem;
   }
   button {
     cursor: pointer;
