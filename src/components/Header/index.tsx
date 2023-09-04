@@ -1,21 +1,11 @@
-import Search from "@components/Search";
-
 import { ReactComponent as Logo } from "@assets/image/svg/logo.svg";
 
 import * as S from "./styles";
 
-interface IHeaderProps {
-  hasSearchForm?: boolean;
-}
-
-const Header = ({ hasSearchForm = false }: IHeaderProps) => {
+const Header = () => {
   return (
     <S.HeaderContent>
-      <S.LogoContent>
-        <Logo />
-      </S.LogoContent>
-
-      {hasSearchForm && <Search />}
+      <Logo />
     </S.HeaderContent>
   );
 };
