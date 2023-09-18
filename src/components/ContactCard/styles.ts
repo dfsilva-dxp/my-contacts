@@ -1,5 +1,10 @@
 import styled, { DefaultTheme, css } from "styled-components";
 
+const ContactCardFlexAlign = css`
+  display: inline-flex;
+  align-items: center;
+`;
+
 export const ContactCardContent = styled.span`
   ${({ theme }) => css`
     width: 100%;
@@ -8,8 +13,7 @@ export const ContactCardContent = styled.span`
     border-radius: 0.25rem;
     box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.04);
 
-    display: inline-flex;
-    align-items: center;
+    ${ContactCardFlexAlign}
     justify-content: space-between;
 
     & + span {
@@ -59,6 +63,8 @@ const buttonVariant = {
 
 export const ContactCardButton = styled.span<IContactCardButtonProps>`
   ${({ theme, color = "blue" }) => css`
+    display: flex;
+    align-items: center;
     cursor: pointer;
     transition: filter 0.15s ease-in-out;
 
