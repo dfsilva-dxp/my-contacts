@@ -7,7 +7,7 @@ const Search = () => {
     <S.Wrapper>
       <Input
         type="search"
-        label="Pesquisar contato..."
+        label="Pesquisar contato"
         borderRadius="full"
         hasBoxShadow={false}
       />
