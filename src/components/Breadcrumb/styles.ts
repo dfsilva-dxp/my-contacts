@@ -16,7 +16,7 @@ export const BreadcrumbContent = styled.div`
   `}
 `;
 
-export const BreadcrumbButtonContent = styled.a`
+export const BreadcrumbButtonContent = styled.span`
   ${({ theme }) => css`
     padding: 0;
     font-weight: ${theme.font.weight.bold};
