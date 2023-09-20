@@ -3,14 +3,7 @@ import { CaretDown, CaretUp, Check } from "phosphor-react";
 
 import * as S from "./styles";
 
-type SelectProps = {
-  placeholder?: string;
-  selectLabel?: string;
-  options: {
-    label: string;
-    value: string;
-  }[];
-};
+import { SelectProps } from "./types";
 
 const SelectInput = ({
   placeholder = "Selecione uma categoria",
