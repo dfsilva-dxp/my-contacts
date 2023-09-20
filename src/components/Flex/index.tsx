@@ -8,6 +8,7 @@ const Flex = ({
   direction = "row",
   align = "flex-start",
   justify = "flex-start",
+  content = "stretch",
   wrap = "wrap",
   gap = "$0"
 }: IFlexProps) => {
@@ -19,6 +20,7 @@ const Flex = ({
       direction={direction}
       align={align}
       justify={justify}
+      content={content}
       wrap={wrap}
       gap={selectedGap}
     >
@@ -44,21 +46,26 @@ enum EGap {
   $11 = "2rem"
 }
 
-type JustifyType =
-  | "flex-start"
-  | "flex-end"
-  | "center"
-  | "space-between"
-  | "space-around"
-  | "space-evenly";
-
 export interface IFlexProps {
   children: ReactNode;
   display?: "none" | "inline-flex" | "flex";
   direction?: "row" | "column" | "row-reverse" | "column-reverse";
   align?: "flex-start" | "flex-end" | "center" | "stretch" | "baseline";
-  justify?: JustifyType;
-  content?: JustifyType | "stretch";
+  justify?:
+    | "flex-start"
+    | "flex-end"
+    | "center"
+    | "space-between"
+    | "space-around"
+    | "space-evenly";
+  content?:
+    | "flex-start"
+    | "flex-end"
+    | "center"
+    | "space-between"
+    | "space-around"
+    | "space-evenly"
+    | "stretch";
   wrap?: "nowrap" | "wrap" | "wrap-reverse";
   gap?: keyof typeof EGap;
 }
