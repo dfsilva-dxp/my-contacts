@@ -1,18 +1,10 @@
 import styled, { css } from "styled-components";
 
-export const BreadcrumbContent = styled.div`
+export const BreadcrumbStrong = styled.strong`
   ${({ theme }) => css`
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    flex-direction: column;
-    gap: 0.5rem;
-
-    & strong {
-      font-size: 1.5rem;
-      font-weight: ${theme.font.weight.bold};
-      line-height: normal;
-    }
+    font-size: 1.5rem;
+    font-weight: ${theme.font.weight.bold};
+    line-height: normal;
   `}
 `;
 
