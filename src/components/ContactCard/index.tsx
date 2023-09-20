@@ -1,32 +1,45 @@
 import { PencilLine, Trash } from "phosphor-react";
 
-import { Badge } from "@/components";
+import { Badge, Flex } from "@/components";
 
 import * as S from "./styles";
 
 const ContactCard = () => {
   return (
     <S.ContactCardContent>
-      <S.ContactCardInfo>
-        <strong>
-          Daniel Silva
-          <Badge>Instagram</Badge>
-        </strong>
+      <Flex align="center" justify="space-between">
+        <S.ContactCardInfo>
+          <Flex
+            display="inline-flex"
+            justify="center"
+            direction="column"
+            gap="$1"
+          >
+            <strong>
+              Daniel Silva
+              <Badge>Instagram</Badge>
+            </strong>
 
-        <small>daniel.silva@email.com</small>
+            <small>daniel.silva@email.com</small>
 
-        <small>(11) 95199-1612</small>
-      </S.ContactCardInfo>
+            <small>(11) 95199-1612</small>
+          </Flex>
+        </S.ContactCardInfo>
 
-      <S.ContactCardButtonsGroup>
-        <S.ContactCardButton>
-          <PencilLine size={20} weight="bold" />
-        </S.ContactCardButton>
+        <Flex display="inline-flex" justify="center" gap="$2">
+          <S.ContactCardButton>
+            <Flex align="center">
+              <PencilLine size={20} weight="bold" />
+            </Flex>
+          </S.ContactCardButton>
 
-        <S.ContactCardButton color="red">
-          <Trash size={20} weight="bold" />
-        </S.ContactCardButton>
-      </S.ContactCardButtonsGroup>
+          <S.ContactCardButton color="red">
+            <Flex align="center">
+              <Trash size={20} weight="bold" />
+            </Flex>
+          </S.ContactCardButton>
+        </Flex>
+      </Flex>
     </S.ContactCardContent>
   );
 };
