@@ -1,6 +1,6 @@
 import styled, { DefaultTheme, css } from "styled-components";
 
-import { ButtonContentProps } from ".";
+import { ButtonContentProps } from "./types";
 
 export const ButtonContent = styled.button<ButtonContentProps>`
   ${({ theme, variant, size }) => css`
