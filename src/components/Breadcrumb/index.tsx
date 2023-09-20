@@ -1,17 +1,18 @@
 import { CaretLeft } from "phosphor-react";
 
+import { Flex } from "@/components";
+
 import * as S from "./styles";
 
-interface IBreadcrumbProps {
-  title: string;
-}
+import { IBreadcrumbProps } from "./types";
 
 const Breadcrumb = ({ title }: IBreadcrumbProps) => {
   return (
-    <S.BreadcrumbContent>
+    <Flex justify="center" direction="column" gap="$1">
       <BreadcrumbButton />
-      <strong>{title}</strong>
-    </S.BreadcrumbContent>
+
+      <S.BreadcrumbStrong>{title}</S.BreadcrumbStrong>
+    </Flex>
   );
 };
 
@@ -20,8 +21,10 @@ export default Breadcrumb;
 const BreadcrumbButton = () => {
   return (
     <S.BreadcrumbButtonContent>
-      <CaretLeft size={18} weight="bold" />
-      Voltar
+      <Flex align="center" justify="center" gap="$1">
+        <CaretLeft size={18} weight="bold" />
+        Voltar
+      </Flex>
     </S.BreadcrumbButtonContent>
   );
 };

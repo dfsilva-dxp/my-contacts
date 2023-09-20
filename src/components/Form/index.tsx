@@ -14,7 +14,7 @@ const Form = () => {
       <Input label="Nome" type="text" name="name" />
       <Input label="E-mail" type="email" name="email" />
       <Input label="Telefone" type="tel" name="phone" />
-      <Select options={options} placeholder="Categoria" />
+      <Select options={options} selectLabel="Categorias" />
       <Button type="submit" size="full">
         Cadastrar
       </Button>

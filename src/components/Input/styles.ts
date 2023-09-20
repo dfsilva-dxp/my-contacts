@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import { InputContentProps } from ".";
+import { InputContentProps } from "./types";
 
 const variant = {
   default: () => css`

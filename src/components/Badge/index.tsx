@@ -1,10 +1,8 @@
+import { PropsWithChildren } from "react";
+
 import * as S from "./styles";
 
-interface IBadgeProps {
-  children: string;
-}
-
-const Badge = ({ children }: IBadgeProps) => {
+const Badge = ({ children }: PropsWithChildren) => {
   return <S.BadgeContent>{children}</S.BadgeContent>;
 };
 
