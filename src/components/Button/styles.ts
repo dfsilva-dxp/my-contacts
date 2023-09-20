@@ -4,6 +4,9 @@ import { ButtonContentProps } from "./types";
 
 export const ButtonContent = styled.button<ButtonContentProps>`
   ${({ theme, variant, size }) => css`
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     gap: 0.5rem;
     border: 2px solid transparent;
     border-radius: 0.25rem;
