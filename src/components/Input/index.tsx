@@ -1,17 +1,6 @@
-import { InputHTMLAttributes } from "react";
-
 import * as S from "./styles";
 
-type InputType = InputHTMLAttributes<HTMLInputElement>;
-
-interface IInputProps extends InputType {
-  borderRadius?: "default" | "full";
-  errorMessage?: string;
-  hasBoxShadow?: boolean;
-  label: string;
-}
-
-export type InputContentProps = Omit<IInputProps, "label">;
+import { IInputProps } from "./types";
 
 const Input = ({
   borderRadius = "default",
