@@ -1,4 +1,8 @@
+import { Link } from "react-router-dom";
+
 import { Button } from "@/components";
+
+import { PATHS } from "@/utils/common/constant/paths";
 
 import * as S from "./styles";
 
@@ -7,9 +11,11 @@ const ContactsHeader = () => {
     <S.ContactHeaderContent>
       <strong>3 contatos</strong>
 
-      <Button as="a" size="small" variant="ghost">
-        Novo contato
-      </Button>
+      <Link to={PATHS.NEW}>
+        <Button size="small" variant="ghost" as="span">
+          Novo contato
+        </Button>
+      </Link>
     </S.ContactHeaderContent>
   );
 };
