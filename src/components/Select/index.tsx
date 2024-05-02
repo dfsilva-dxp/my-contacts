@@ -8,10 +8,11 @@ import { SelectProps } from "./types";
 const SelectInput = ({
   placeholder = "Selecione uma categoria",
   selectLabel,
-  options
+  options,
+  ...props
 }: SelectProps) => {
   return (
-    <Select.Root>
+    <Select.Root {...props}>
       <S.SelectTriggerContent aria-label="Categories">
         <Select.Value placeholder={placeholder} />
 

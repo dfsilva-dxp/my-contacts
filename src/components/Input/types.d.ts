@@ -7,6 +7,7 @@ export interface IInputProps extends InputType {
   errorMessage?: string;
   hasBoxShadow?: boolean;
   label: string;
+  mask?: "cep" | "currency" | "cpf" | "phone";
 }
 
 export type InputContentProps = Omit<IInputProps, "label">;
