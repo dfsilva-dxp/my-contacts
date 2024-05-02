@@ -28,8 +28,8 @@ const buttonVariants = {
     background-color: ${theme.colors.primary.main};
     color: ${theme.colors.white};
 
-    &:hover,
-    &:active {
+    &:hover:not(:disabled),
+    &:active:not(:disabled) {
       background-color: ${theme.colors.primary.dark};
     }
   `,
