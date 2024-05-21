@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { PencilLine, Trash } from "phosphor-react";
+import * as Dialog from "@radix-ui/react-dialog";
 
-import { Badge, Flex } from "@/components";
+import { Badge, Flex, Modal } from "@/components";
 
 import { PATHS } from "@/utils/common/constant/paths";
 
@@ -40,7 +41,13 @@ const ContactCard = () => {
 
           <S.ContactCardButton color="red">
             <Flex align="center">
-              <Trash size={20} weight="bold" />
+              <Dialog.Root>
+                <Dialog.Trigger asChild>
+                  <Trash size={20} weight="bold" />
+                </Dialog.Trigger>
+
+                <Modal danger />
+              </Dialog.Root>
             </Flex>
           </S.ContactCardButton>
         </Flex>
