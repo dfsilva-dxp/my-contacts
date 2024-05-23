@@ -1,8 +1,14 @@
+import { ChangeHandler } from "react-hook-form";
+
+interface IOption {
+  label: string;
+  value: string;
+}
+
 export type SelectProps = {
   placeholder?: string;
   selectLabel?: string;
-  options: {
-    label: string;
-    value: string;
-  }[];
+  name?: string;
+  onChange?: ChangeHandler | undefined;
+  options: IOption[];
 };
