@@ -50,9 +50,8 @@ export const Input = styled.input`
 
 export const Error = styled.p`
   ${({ theme }) => css`
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
+    padding: 0.5rem 0 1rem;
+    font-size: 0.75rem;
     color: ${theme.colors.danger.main};
-    font-weight: ${theme.font.weight.bold};
   `}
 `;

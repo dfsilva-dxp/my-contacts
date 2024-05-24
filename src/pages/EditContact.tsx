@@ -2,14 +2,15 @@ import { Breadcrumb, Container, Form, Header } from "@/components";
 
 import { PATHS } from "@/utils/common/constant/paths";
 
-const NewContactPage = () => {
+const EditContactPage = () => {
+  console.log("Renderizando NewContactPage");
   return (
     <Container>
       <Header />
-      <Breadcrumb title="Novo Contato" url={PATHS.HOME} />
+      <Breadcrumb title="Editar Daniel Silva" url={PATHS.HOME} />
       <Form />
     </Container>
   );
 };
 
-export default NewContactPage;
+export default EditContactPage;

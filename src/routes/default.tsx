@@ -1,4 +1,4 @@
-import { Switch, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import {
   EditContactPage,
@@ -7,15 +7,15 @@ import {
   NotFoundPage
 } from "@/pages";
 
-import { ROUTES } from "@/utils/common/routes";
+import { ROUTES } from "@/utils/common/constant/routes";
 const DefaultRoutes = () => {
   return (
-    <Switch>
-      <Route path={ROUTES.HOME} exact component={HomePage} />
-      <Route path={ROUTES.NEW} component={NewContactPage} />
-      <Route path={ROUTES.EDIT} component={EditContactPage} />
-      <Route path={ROUTES.NOTFOUND} component={NotFoundPage} />
-    </Switch>
+    <Routes>
+      <Route path={ROUTES.HOME} element={<HomePage />} />
+      <Route path={ROUTES.NEW} element={<NewContactPage />} />
+      <Route path={ROUTES.EDIT} element={<EditContactPage />} />
+      <Route path={ROUTES.NOTFOUND} element={<NotFoundPage />} />
+    </Routes>
   );
 };
 
