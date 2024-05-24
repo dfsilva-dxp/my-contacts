@@ -5,6 +5,7 @@ const Container = styled.main`
     width: 100%;
     max-width: ${theme.grid.container.default};
     margin: 0 auto;
+    padding: 0 1rem;
   `}
 `;
 
