@@ -17,9 +17,8 @@ const contactFormSchema = z.object({
     .string()
     .min(3, { message: "O nome deve conter um mínimo de 3 letras." }),
   email: z.string().email("Este e-mail não é válido."),
-  phone: z
-    .string()
-    .min(12, { message: "O nome deve conter um mínimo de 3 letras." })
+  phone: z.string().min(12, { message: "Telefone inválido." }),
+  category: z.string()
 });
 
 export type contactFormData = z.infer<typeof contactFormSchema>;
@@ -46,20 +45,30 @@ const Form = () => {
           type="text"
           {...register("name")}
           errorMessage={errors.name && errors.name.message}
+          autoFocus
+          tabIndex={1}
         />
         <Input
           label="E-mail"
           type="email"
           {...register("email")}
           errorMessage={errors.email && errors.email.message}
+          tabIndex={2}
         />
         <Input
           label="Telefone"
           mask="phone"
           {...register("phone")}
           errorMessage={errors.phone && errors.phone.message}
+          tabIndex={3}
         />
-        <Select options={options} selectLabel="Categorias" />
+        <Select
+          options={options}
+          selectLabel="Categorias"
+          {...register("category")}
+          name={register("category").name}
+          onChange={register("category").onChange}
+        />
         <Button type="submit" size="full" disabled={isSubmitting}>
           Cadastrar
         </Button>

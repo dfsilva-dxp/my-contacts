@@ -1,3 +1,4 @@
+import { forwardRef, ForwardRefRenderFunction } from "react";
 import * as Select from "@radix-ui/react-select";
 import { CaretDown, CaretUp, Check } from "phosphor-react";
 
@@ -5,15 +6,25 @@ import * as S from "./styles";
 
 import { SelectProps } from "./types";
 
-const SelectInput = ({
-  placeholder = "Selecione uma categoria",
-  selectLabel,
-  options,
-  ...props
-}: SelectProps) => {
+const SelectInput: ForwardRefRenderFunction<HTMLButtonElement, SelectProps> = (
+  {
+    placeholder = "Selecione uma categoria",
+    selectLabel,
+    options,
+    name,
+    onChange,
+    ...props
+  },
+  ref
+) => {
   return (
-    <Select.Root {...props}>
-      <S.SelectTriggerContent aria-label="Categories">
+    <Select.Root
+      {...props}
+      onValueChange={(value) =>
+        onChange && onChange({ target: { name, value } })
+      }
+    >
+      <S.SelectTriggerContent aria-label="Categories" ref={ref}>
         <Select.Value placeholder={placeholder} />
 
         <S.SelectIcon>
@@ -52,4 +63,4 @@ const SelectInput = ({
   );
 };
 
-export default SelectInput;
+export default forwardRef(SelectInput);
