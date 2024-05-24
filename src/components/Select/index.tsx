@@ -4,9 +4,9 @@ import { CaretDown, CaretUp, Check } from "phosphor-react";
 
 import * as S from "./styles";
 
-import { SelectProps } from "./types";
+import { SelectElement, SelectProps } from "./types";
 
-const SelectInput: ForwardRefRenderFunction<HTMLButtonElement, SelectProps> = (
+const SelectInput: ForwardRefRenderFunction<SelectElement, SelectProps> = (
   {
     placeholder = "Selecione uma categoria",
     selectLabel,
@@ -24,7 +24,11 @@ const SelectInput: ForwardRefRenderFunction<HTMLButtonElement, SelectProps> = (
         onChange && onChange({ target: { name, value } })
       }
     >
-      <S.SelectTriggerContent aria-label="Categories" ref={ref}>
+      <S.SelectTriggerContent
+        aria-label="Categories"
+        ref={ref}
+        data-placeholder={placeholder}
+      >
         <Select.Value placeholder={placeholder} />
 
         <S.SelectIcon>
