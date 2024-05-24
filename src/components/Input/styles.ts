@@ -16,7 +16,7 @@ const variant = {
 
 export const InputContent = styled.div<InputContentProps>`
   ${({ theme, borderRadius, hasBoxShadow }) => css`
-    width: 31.25rem;
+    width: 100%;
     height: 3.125rem;
     padding: 0.5rem 1rem;
     background: ${theme.colors.white};
