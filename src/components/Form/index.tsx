@@ -69,7 +69,7 @@ const Form = () => {
           name={register("category").name}
           onChange={register("category").onChange}
         />
-        <Button type="submit" size="full" disabled={isSubmitting}>
+        <Button type="submit" size="full" disabled={isSubmitting} tabIndex={5}>
           Cadastrar
         </Button>
       </form>

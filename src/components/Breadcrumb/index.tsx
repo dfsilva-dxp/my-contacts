@@ -22,7 +22,7 @@ export default Breadcrumb;
 const BreadcrumbButton = ({ url }: BreadcrumbButtonProps) => {
   return (
     <S.BreadcrumbButtonContent>
-      <Link to={url}>
+      <Link to={url} tabIndex={6}>
         <Flex align="center" justify="center" gap="$1">
           <CaretLeft size={16} weight="bold" />
           Voltar

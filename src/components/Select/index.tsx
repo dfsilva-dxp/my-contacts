@@ -24,11 +24,7 @@ const SelectInput: ForwardRefRenderFunction<SelectElement, SelectProps> = (
         onChange && onChange({ target: { name, value } })
       }
     >
-      <S.SelectTriggerContent
-        aria-label="Categories"
-        ref={ref}
-        data-placeholder={placeholder}
-      >
+      <S.SelectTriggerContent aria-label="Categories" ref={ref} tabIndex={4}>
         <Select.Value placeholder={placeholder} />
 
         <S.SelectIcon>
