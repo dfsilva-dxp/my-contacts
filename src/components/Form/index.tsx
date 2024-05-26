@@ -27,7 +27,7 @@ const Form = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting }
+    formState: { errors, isSubmitting, isValid }
   } = useForm<contactFormData>({
     resolver: zodResolver(contactFormSchema)
   });
@@ -70,7 +70,12 @@ const Form = () => {
           name={register("category").name}
           onChange={register("category").onChange}
         />
-        <Button type="submit" size="full" disabled={isSubmitting} tabIndex={5}>
+        <Button
+          type="submit"
+          size="full"
+          disabled={!isValid || isSubmitting}
+          tabIndex={5}
+        >
           Cadastrar
         </Button>
       </form>
