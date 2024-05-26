@@ -13,6 +13,11 @@ export type SelectProps = {
   name?: string;
   onChange?: ChangeHandler | undefined;
   options: IOption[];
+  errorMessage?: string;
 };
 
 export type SelectElement = ElementRef<typeof Select.Trigger>;
+
+export type SelectTriggerContentProps = {
+  $hasError: boolean;
+};

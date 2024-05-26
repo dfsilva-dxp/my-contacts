@@ -5,6 +5,7 @@ export type InputType = InputHTMLAttributes<HTMLInputElement>;
 export interface IInputProps extends InputType {
   borderRadius?: "default" | "full";
   errorMessage?: string;
+  hasError?: boolean;
   hasBoxShadow?: boolean;
   label: string;
   mask?: "cep" | "currency" | "cpf" | "phone";

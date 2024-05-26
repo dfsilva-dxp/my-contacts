@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css, DefaultTheme } from "styled-components";
 
 import { InputContentProps } from "./types";
 
@@ -11,11 +11,17 @@ const variant = {
   `,
   withBoxShadow: () => css`
     box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.04);
+  `,
+  withError: (theme: DefaultTheme) => css`
+    &,
+    &:focus-within {
+      border-color: ${theme.colors.danger.main};
+    }
   `
 };
 
 export const InputContent = styled.div<InputContentProps>`
-  ${({ theme, borderRadius, hasBoxShadow }) => css`
+  ${({ theme, borderRadius, hasBoxShadow, hasError }) => css`
     width: 100%;
     height: 3.125rem;
     padding: 0.5rem 1rem;
@@ -29,7 +35,8 @@ export const InputContent = styled.div<InputContentProps>`
     }
 
     ${!!borderRadius && variant[borderRadius]}
-    ${!!hasBoxShadow && variant.withBoxShadow}
+    ${hasBoxShadow && variant.withBoxShadow}
+    ${hasError && variant.withError(theme)}
   `}
 `;
 
