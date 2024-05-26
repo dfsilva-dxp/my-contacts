@@ -12,7 +12,7 @@ interface IHeaderProps {
 const Header = ({ hasSearchForm = false }: IHeaderProps) => {
   return (
     <S.HeaderContent>
-      <Flex direction="column" align="center" justify="center" gap="$4">
+      <Flex direction="column" align="center" gap="$4">
         <Logo />
 
         {hasSearchForm && <Search />}

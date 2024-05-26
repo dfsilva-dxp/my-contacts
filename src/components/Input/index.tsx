@@ -46,7 +46,11 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = (
 
   return (
     <>
-      <S.InputContent borderRadius={borderRadius} hasBoxShadow={hasBoxShadow}>
+      <S.InputContent
+        borderRadius={borderRadius}
+        hasBoxShadow={hasBoxShadow}
+        hasError={!!errorMessage}
+      >
         <S.Input
           placeholder={label}
           {...props}

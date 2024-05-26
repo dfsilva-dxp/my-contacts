@@ -18,6 +18,10 @@ export const ButtonContent = styled.button<ButtonContentProps>`
       line-height: 1;
     }
 
+    &[disabled] {
+      background-color: ${theme.colors.gray[200]};
+    }
+
     ${!!variant && buttonVariants[variant](theme)}
     ${!!size && buttonVariants[size]}
   `}

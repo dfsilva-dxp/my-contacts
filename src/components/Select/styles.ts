@@ -1,8 +1,27 @@
-import styled, { css } from "styled-components";
+import styled, { css, DefaultTheme } from "styled-components";
 import * as Select from "@radix-ui/react-select";
 
-export const SelectTriggerContent = styled(Select.SelectTrigger)`
-  ${({ theme }) => css`
+import { SelectTriggerContentProps } from "./types";
+
+export const SelectWrapper = styled.div``;
+
+const variant = {
+  withError: (theme: DefaultTheme) => css`
+    &,
+    &:focus-within {
+      border-color: ${theme.colors.danger.main};
+    }
+
+    ${SelectIcon} {
+      color: ${theme.colors.danger.main};
+    }
+  `
+};
+
+export const SelectTriggerContent = styled(
+  Select.SelectTrigger
+)<SelectTriggerContentProps>`
+  ${({ theme, $hasError }) => css`
     width: 100%;
     height: 3.125rem;
     padding: 0.5rem 1rem;
@@ -29,6 +48,8 @@ export const SelectTriggerContent = styled(Select.SelectTrigger)`
     & button {
       margin-top: 0;
     }
+
+    ${$hasError && variant.withError(theme)}
   `}
 `;
 
@@ -114,4 +135,12 @@ export const SelectItemIndicator = styled(Select.ItemIndicator)`
   display: inline-flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const Error = styled.p`
+  ${({ theme }) => css`
+    padding: 0.5rem 0 1rem;
+    font-size: 0.75rem;
+    color: ${theme.colors.danger.main};
+  `}
 `;

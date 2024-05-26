@@ -18,7 +18,7 @@ const contactFormSchema = z.object({
     .min(3, { message: "O nome deve conter um mínimo de 3 letras." }),
   email: z.string().email("Este e-mail não é válido."),
   phone: z.string().min(12, { message: "Telefone inválido." }),
-  category: z.string()
+  category: z.string().min(1, { message: "Selecione uma categoria." })
 });
 
 export type contactFormData = z.infer<typeof contactFormSchema>;
@@ -27,7 +27,7 @@ const Form = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting }
+    formState: { errors, isSubmitting, isValid }
   } = useForm<contactFormData>({
     resolver: zodResolver(contactFormSchema)
   });
@@ -65,11 +65,17 @@ const Form = () => {
         <Select
           options={options}
           selectLabel="Categorias"
+          errorMessage={errors.category && errors.category.message}
           {...register("category")}
           name={register("category").name}
           onChange={register("category").onChange}
         />
-        <Button type="submit" size="full" disabled={isSubmitting}>
+        <Button
+          type="submit"
+          size="full"
+          disabled={!isValid || isSubmitting}
+          tabIndex={5}
+        >
           Cadastrar
         </Button>
       </form>

@@ -1,10 +1,12 @@
-import { ContactsList, Container, Header } from "@/components";
+import { Box, ContactsList, Container, Header } from "@/components";
 
 const HomePage = () => {
   return (
     <Container>
-      <Header hasSearchForm />
-      <ContactsList />
+      <Box>
+        <Header hasSearchForm />
+        <ContactsList />
+      </Box>
     </Container>
   );
 };

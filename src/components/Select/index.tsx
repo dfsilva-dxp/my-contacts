@@ -9,6 +9,7 @@ import { SelectElement, SelectProps } from "./types";
 const SelectInput: ForwardRefRenderFunction<SelectElement, SelectProps> = (
   {
     placeholder = "Selecione uma categoria",
+    errorMessage,
     selectLabel,
     options,
     name,
@@ -18,52 +19,56 @@ const SelectInput: ForwardRefRenderFunction<SelectElement, SelectProps> = (
   ref
 ) => {
   return (
-    <Select.Root
-      {...props}
-      onValueChange={(value) =>
-        onChange && onChange({ target: { name, value } })
-      }
-    >
-      <S.SelectTriggerContent
-        aria-label="Categories"
-        ref={ref}
-        data-placeholder={placeholder}
+    <S.SelectWrapper>
+      <Select.Root
+        {...props}
+        onValueChange={(value) =>
+          onChange && onChange({ target: { name, value } })
+        }
       >
-        <Select.Value placeholder={placeholder} />
+        <S.SelectTriggerContent
+          aria-label="Categories"
+          ref={ref}
+          tabIndex={4}
+          $hasError={!!errorMessage}
+        >
+          <Select.Value placeholder={placeholder} />
 
-        <S.SelectIcon>
-          <CaretDown weight="bold" />
-        </S.SelectIcon>
-      </S.SelectTriggerContent>
-
-      <Select.Portal>
-        <S.SelectContent>
-          <S.SelectScrollUpButton>
-            <CaretUp weight="bold" />
-          </S.SelectScrollUpButton>
-
-          <S.SelectViewport>
-            <S.SelectGroup>
-              {!!selectLabel && <S.SelectLabel>Categorias</S.SelectLabel>}
-
-              {options.map((item) => (
-                <S.SelectItem value={item.value} key={item.value}>
-                  <Select.ItemText>{item.label}</Select.ItemText>
-
-                  <Select.ItemIndicator>
-                    <Check weight="bold" />
-                  </Select.ItemIndicator>
-                </S.SelectItem>
-              ))}
-            </S.SelectGroup>
-          </S.SelectViewport>
-
-          <Select.ScrollDownButton>
+          <S.SelectIcon>
             <CaretDown weight="bold" />
-          </Select.ScrollDownButton>
-        </S.SelectContent>
-      </Select.Portal>
-    </Select.Root>
+          </S.SelectIcon>
+        </S.SelectTriggerContent>
+
+        <Select.Portal>
+          <S.SelectContent>
+            <S.SelectScrollUpButton>
+              <CaretUp weight="bold" />
+            </S.SelectScrollUpButton>
+
+            <S.SelectViewport>
+              <S.SelectGroup>
+                {!!selectLabel && <S.SelectLabel>Categorias</S.SelectLabel>}
+
+                {options.map((item) => (
+                  <S.SelectItem value={item.value} key={item.value}>
+                    <Select.ItemText>{item.label}</Select.ItemText>
+
+                    <Select.ItemIndicator>
+                      <Check weight="bold" />
+                    </Select.ItemIndicator>
+                  </S.SelectItem>
+                ))}
+              </S.SelectGroup>
+            </S.SelectViewport>
+
+            <Select.ScrollDownButton>
+              <CaretDown weight="bold" />
+            </Select.ScrollDownButton>
+          </S.SelectContent>
+        </Select.Portal>
+      </Select.Root>
+      <S.Error>{!!errorMessage && errorMessage}</S.Error>
+    </S.SelectWrapper>
   );
 };
 
