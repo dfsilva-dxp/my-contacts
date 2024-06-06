@@ -1,10 +1,11 @@
+import { PropsWithChildren } from "react";
 import { CaretUp } from "phosphor-react";
 
-import { ContactCard, ContactsHeader } from "@/components";
+import { ContactsHeader } from "@/components";
 
 import * as S from "./styles";
 
-const ContactsList = () => {
+const ContactsList = ({ children }: PropsWithChildren) => {
   return (
     <S.ContactsListContent>
       <ContactsHeader />
@@ -16,10 +17,7 @@ const ContactsList = () => {
           </S.OrderByButton>
         </S.ButtonWrapper>
 
-        <S.ContactsListItems>
-          <ContactCard />
-          <ContactCard />
-        </S.ContactsListItems>
+        <S.ContactsListItems>{children}</S.ContactsListItems>
       </S.ContactsListBody>
     </S.ContactsListContent>
   );
