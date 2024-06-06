@@ -30,11 +30,14 @@ const HomePage = () => {
     <Container>
       <Box>
         <Header hasSearchForm />
-        <ContactsList>
-          {contacts.length &&
+        <ContactsList contact_count={String(contacts.length).padStart(2, "0")}>
+          {contacts.length ? (
             contacts.map((contact) => (
               <ContactCard contact={contact} key={contact.id} />
-            ))}
+            ))
+          ) : (
+            <p>Nenhum item encontrado</p>
+          )}
         </ContactsList>
       </Box>
     </Container>

@@ -1,14 +1,15 @@
-import { PropsWithChildren } from "react";
 import { CaretUp } from "phosphor-react";
 
 import { ContactsHeader } from "@/components";
 
 import * as S from "./styles";
 
-const ContactsList = ({ children }: PropsWithChildren) => {
+import { IContactsListProps } from "./types";
+
+const ContactsList = ({ children, contact_count }: IContactsListProps) => {
   return (
     <S.ContactsListContent>
-      <ContactsHeader />
+      <ContactsHeader contact_count={contact_count} />
 
       <S.ContactsListBody>
         <S.ButtonWrapper>

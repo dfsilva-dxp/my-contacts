@@ -6,10 +6,12 @@ import { PATHS } from "@/utils/common/constant/paths";
 
 import * as S from "./styles";
 
-const ContactsHeader = () => {
+import { IContactsHeaderProps } from "./types";
+
+const ContactsHeader = ({ contact_count }: IContactsHeaderProps) => {
   return (
     <S.ContactHeaderContent>
-      <strong>3 contatos</strong>
+      <strong>{`${contact_count} contatos`}</strong>
 
       <Link to={PATHS.NEW}>
         <Button size="small" variant="ghost" as="span">
