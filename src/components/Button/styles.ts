@@ -43,7 +43,7 @@ const buttonVariants = {
 
     &:hover,
     &:active {
-      background-color: ${theme.colors.white};
+      background-color: ${theme.colors.primary.lighter};
     }
   `,
   ghost: (theme: DefaultTheme) => css`
@@ -65,6 +65,11 @@ const buttonVariants = {
     &:active {
       background-color: ${theme.colors.danger.dark};
     }
+  `,
+  icon: () => css`
+    font-size: 0.875rem;
+    height: 2.5rem;
+    padding: 0.3rem;
   `,
   small: () => css`
     font-size: 0.875rem;

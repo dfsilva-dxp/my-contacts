@@ -33,6 +33,7 @@ const Form = () => {
   });
 
   const onSubmit = async (data: contactFormData) => {
+    // eslint-disable-next-line no-console
     console.log(data);
     reset();
   };

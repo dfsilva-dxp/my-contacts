@@ -1,13 +1,15 @@
 import { CaretUp } from "phosphor-react";
 
-import { ContactCard, ContactsHeader } from "@/components";
+import { ContactsHeader } from "@/components";
 
 import * as S from "./styles";
 
-const ContactsList = () => {
+import { IContactsListProps } from "./types";
+
+const ContactsList = ({ children, contact_count }: IContactsListProps) => {
   return (
     <S.ContactsListContent>
-      <ContactsHeader />
+      <ContactsHeader contact_count={contact_count} />
 
       <S.ContactsListBody>
         <S.ButtonWrapper>
@@ -16,10 +18,7 @@ const ContactsList = () => {
           </S.OrderByButton>
         </S.ButtonWrapper>
 
-        <S.ContactsListItems>
-          <ContactCard />
-          <ContactCard />
-        </S.ContactsListItems>
+        <S.ContactsListItems>{children}</S.ContactsListItems>
       </S.ContactsListBody>
     </S.ContactsListContent>
   );
