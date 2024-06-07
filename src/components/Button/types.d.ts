@@ -11,7 +11,7 @@ export type ButtonType =
 
 export type ButtonProps = {
   variant?: "primary" | "neutral" | "ghost" | "danger";
-  size?: "small" | "medium" | "full";
+  size?: "small" | "medium" | "full" | "icon";
   children: ReactNode;
   as?: ElementType;
 } & ButtonType;
