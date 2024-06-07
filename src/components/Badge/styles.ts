@@ -7,6 +7,7 @@ export const BadgeContent = styled.span`
     padding: 0.25rem;
     font-size: 0.75rem;
     color: ${theme.colors.primary.main};
+    font-weight: ${theme.font.weight.bold};
     text-transform: uppercase;
   `}
 `;
