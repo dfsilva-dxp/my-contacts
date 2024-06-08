@@ -9,6 +9,7 @@ const theme = {
     family:
       "Sora, Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Poppins, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
     weight: {
+      thin: 100,
       regular: 400,
       bold: 700
     }
