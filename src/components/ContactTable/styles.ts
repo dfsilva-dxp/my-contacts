@@ -1,11 +1,12 @@
 import styled, { css } from "styled-components";
 
 export const TableContainer = styled.main`
-  margin-top: 2rem;
+  margin-top: 1rem;
 `;
 
 export const TableWrapper = styled.div`
   width: 100%;
+  padding: 0.5rem 0 1rem;
 
   @media (max-width: 768px) {
     overflow-x: scroll;
@@ -15,14 +16,13 @@ export const TableWrapper = styled.div`
 export const Table = styled.table`
   ${({ theme }) => css`
     min-width: 38rem;
+    height: 100%;
     table-layout: auto;
     border-collapse: separate;
     border-spacing: 0 0.5rem;
     text-align: left;
-    margin-top: 1rem;
 
     thead {
-      color: ${theme.colors.gray[200]};
       text-transform: uppercase;
       font-size: 0.75rem;
     }
