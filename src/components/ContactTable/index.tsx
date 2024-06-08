@@ -77,7 +77,10 @@ const ContactTable = ({ contacts }: IContactTableProps) => {
                       <Badge>{contact.category_name || "Pessoal"}</Badge>
                     </td>
                     <td>
-                      <DropdownMenu contact_id={contact.id} />
+                      <DropdownMenu
+                        contact_id={contact.id}
+                        contact_name={contact.name}
+                      />
                     </td>
                   </tr>
                 ))}
