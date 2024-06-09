@@ -32,7 +32,7 @@ const DropdownMenu = ({ contact_id, contact_name }: IDropdownMenuProps) => {
           <S.DropdownMenuContent sideOffset={5} aria-label="profile menu">
             <S.DropdownMenuItem>
               <Link to={`${PATHS.EDIT}/${contact_id}`} className="blue">
-                <PencilLine size={16} weight="bold" />
+                <PencilLine size={14} weight="bold" />
               </Link>
             </S.DropdownMenuItem>
 
@@ -40,7 +40,7 @@ const DropdownMenu = ({ contact_id, contact_name }: IDropdownMenuProps) => {
 
             <S.DropdownMenuItem>
               <button type="button" className="red" onClick={toggleModal}>
-                <Trash size={16} weight="bold" />
+                <Trash size={14} weight="bold" />
               </button>
             </S.DropdownMenuItem>
 

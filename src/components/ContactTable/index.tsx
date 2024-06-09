@@ -1,13 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { CaretDown, CaretUp } from "phosphor-react";
 
-import { Badge, Button, DropdownMenu, Flex } from "@/components";
+import { Badge, DropdownMenu, Flex } from "@/components";
 
 import { formatPhoneNumber } from "@/utils/common/functions/formatPhoneNumber";
 import { sortContacts } from "@/utils/common/functions/sortContacts";
-
-import { PATHS } from "@/utils/common/constant/paths";
 
 import * as S from "./styles";
 
@@ -28,22 +25,6 @@ const ContactTable = ({ contacts }: IContactTableProps) => {
   return (
     <S.TableContainer>
       <Flex direction="column" align="stretch" gap="$4">
-        <Flex align="center" justify="space-between">
-          {contacts.length > 0 && (
-            <small>
-              <strong>
-                {`${String(contacts.length).padStart(2, "0")} contatos`}
-              </strong>
-            </small>
-          )}
-
-          <Link to={PATHS.NEW}>
-            <Button size="small" variant="ghost" as="span">
-              Novo contato
-            </Button>
-          </Link>
-        </Flex>
-
         <S.TableWrapper>
           <S.Table>
             <thead>
