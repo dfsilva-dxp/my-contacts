@@ -1,23 +1,41 @@
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+
 import { ReactComponent as Logo } from "@assets/image/svg/logo.svg";
 
-import Search from "@components/Search";
+import { Input } from "@/components";
 import Flex from "@components/Flex";
-
-import * as S from "./styles";
 
 interface IHeaderProps {
   hasSearchForm?: boolean;
+  onSetSearchTerm?: Dispatch<SetStateAction<string>>;
 }
 
-const Header = ({ hasSearchForm = false }: IHeaderProps) => {
-  return (
-    <S.HeaderContent>
-      <Flex direction="column" align="center" gap="$4">
-        <Logo />
+const Header = ({ hasSearchForm = false, onSetSearchTerm }: IHeaderProps) => {
+  const [value, setValue] = useState("");
 
-        {hasSearchForm && <Search />}
+  function handleChange(evt: ChangeEvent<HTMLInputElement>) {
+    const { value } = evt.target;
+    setValue(value);
+    !!onSetSearchTerm && onSetSearchTerm(value);
+  }
+
+  return (
+    <Flex direction="column" align="stretch" justify="center" gap="$4">
+      <Flex justify="center">
+        <Logo />
       </Flex>
-    </S.HeaderContent>
+
+      {hasSearchForm && (
+        <Input
+          type="search"
+          label="Pesquisar contato"
+          borderRadius="full"
+          hasBoxShadow={false}
+          value={value}
+          onChange={handleChange}
+        />
+      )}
+    </Flex>
   );
 };
 

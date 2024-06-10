@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { CaretDown, CaretUp } from "phosphor-react";
 
 import { Badge, DropdownMenu, Flex } from "@/components";
@@ -14,8 +13,6 @@ const ContactTable = ({
   order,
   onSortByName
 }: IContactTableProps) => {
-  const list = useMemo(() => contacts, [contacts]);
-
   return (
     <S.TableContainer>
       <Flex direction="column" align="stretch" gap="$4">
@@ -42,8 +39,8 @@ const ContactTable = ({
               </tr>
             </thead>
             <tbody>
-              {list.length > 0 &&
-                list.map((contact) => (
+              {contacts.length > 0 &&
+                contacts.map((contact) => (
                   <tr key={contact.id}>
                     <td>{contact.name}</td>
                     <td>{formatPhoneNumber(contact.phone)}</td>

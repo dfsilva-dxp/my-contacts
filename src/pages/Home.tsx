@@ -1,5 +1,5 @@
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 import {
   Box,
@@ -18,32 +18,51 @@ import { sortContactsByName } from "@/utils/common/functions/sortContactsByName"
 const HomePage = () => {
   const [contacts, setContacts] = useState<IContact[]>([]);
   const [order, setOrder] = useState<"asc" | "desc">("asc");
+  const [searchTerm, setSearchTerm] = useState("");
 
   function toggleSortByName() {
     setOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
   }
 
-  useEffect(() => {
+  const fetchContacts = useCallback(async () => {
     fetch("http://localhost:3000/api/contacts")
       .then(async (response) => {
         const data: IContact[] = await response.json();
         setContacts(data);
       })
       .catch(console.error);
-
-    return () => setContacts([]);
   }, []);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetchContacts();
+
+    return () => {
+      controller.abort();
+    };
+  }, [fetchContacts]);
+
+  const filteredContacts = useMemo(() => {
+    if (searchTerm) {
+      return contacts.filter((contact) =>
+        contact.name.toLowerCase().startsWith(searchTerm.toLowerCase())
+      );
+    }
+
+    return contacts;
+  }, [contacts, searchTerm]);
 
   return (
     <Container>
       <Box>
-        <Header hasSearchForm />
+        <Header hasSearchForm onSetSearchTerm={setSearchTerm} />
+
         <Flex align="center" justify="space-between">
           <small>
             <strong>
               {`${
-                contacts.length > 0
-                  ? String(contacts.length).padStart(2, "00")
+                filteredContacts.length > 0
+                  ? String(filteredContacts.length).padStart(2, "00")
                   : "0"
               } contatos`}
             </strong>
@@ -58,7 +77,7 @@ const HomePage = () => {
 
         <ContactTable
           contacts={sortContactsByName({
-            contacts: [...contacts],
+            contacts: [...filteredContacts],
             order
           })}
           order={order}
