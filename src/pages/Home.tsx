@@ -7,39 +7,35 @@ import {
   ContactTable,
   Container,
   Flex,
-  Header,
-  Loader
+  Header
 } from "@/components";
 
 import { PATHS } from "@/utils/common/constant/paths";
 
-import { IContact } from "@/components/ContactCard/types";
+import { IContact } from "@/components/ContactTable/types";
+import { sortContactsByName } from "@/utils/common/functions/sortContactsByName";
 
 const HomePage = () => {
   const [contacts, setContacts] = useState<IContact[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [order, setOrder] = useState<"asc" | "desc">("asc");
 
-  function getAllContacts() {
-    fetch("http://localhost:3000/api/contacts")
-      .then(async (response) => {
-        setLoading(true);
-
-        const data: IContact[] = await response.json();
-        setContacts(data);
-      })
-      .then(() => setLoading(false))
-      .catch(console.error);
+  function toggleSortByName() {
+    setOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
   }
 
   useEffect(() => {
-    getAllContacts();
+    fetch("http://localhost:3000/api/contacts")
+      .then(async (response) => {
+        const data: IContact[] = await response.json();
+        setContacts(data);
+      })
+      .catch(console.error);
 
     return () => setContacts([]);
   }, []);
 
   return (
     <Container>
-      {loading && <Loader />}
       <Box>
         <Header hasSearchForm />
         <Flex align="center" justify="space-between">
@@ -59,7 +55,15 @@ const HomePage = () => {
             </Button>
           </Link>
         </Flex>
-        <ContactTable contacts={contacts} />
+
+        <ContactTable
+          contacts={sortContactsByName({
+            contacts: [...contacts],
+            order
+          })}
+          order={order}
+          onSortByName={toggleSortByName}
+        />
       </Box>
     </Container>
   );

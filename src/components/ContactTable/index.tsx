@@ -1,26 +1,20 @@
-import { useState } from "react";
+import { useMemo } from "react";
 import { CaretDown, CaretUp } from "phosphor-react";
 
 import { Badge, DropdownMenu, Flex } from "@/components";
 
 import { formatPhoneNumber } from "@/utils/common/functions/formatPhoneNumber";
-import { sortContacts } from "@/utils/common/functions/sortContacts";
 
 import * as S from "./styles";
 
 import { IContactTableProps } from "./types";
 
-const ContactTable = ({ contacts }: IContactTableProps) => {
-  const [sortOrder, setSortOrder] = useState("asc");
-
-  function handleSortClick() {
-    setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
-  }
-
-  const sortedContacts = sortContacts({
-    contacts: [...contacts],
-    order: sortOrder
-  });
+const ContactTable = ({
+  contacts,
+  order,
+  onSortByName
+}: IContactTableProps) => {
+  const list = useMemo(() => contacts, [contacts]);
 
   return (
     <S.TableContainer>
@@ -29,11 +23,11 @@ const ContactTable = ({ contacts }: IContactTableProps) => {
           <S.Table>
             <thead>
               <tr>
-                <th onClick={handleSortClick} style={{ cursor: "pointer" }}>
+                <th onClick={onSortByName} style={{ cursor: "pointer" }}>
                   <Flex align="center" gap="$1">
                     Nome
                     <Flex direction="column">
-                      {sortOrder === "asc" ? (
+                      {order === "asc" ? (
                         <CaretUp size={14} weight="bold" />
                       ) : (
                         <CaretDown size={14} weight="bold" />
@@ -48,8 +42,8 @@ const ContactTable = ({ contacts }: IContactTableProps) => {
               </tr>
             </thead>
             <tbody>
-              {sortedContacts.length > 0 &&
-                sortedContacts.map((contact) => (
+              {list.length > 0 &&
+                list.map((contact) => (
                   <tr key={contact.id}>
                     <td>{contact.name}</td>
                     <td>{formatPhoneNumber(contact.phone)}</td>

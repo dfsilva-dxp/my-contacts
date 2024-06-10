@@ -1,11 +1,11 @@
-import { IContact } from "@/components/ContactCard/types";
+import { IContact } from "@/components/ContactTable/types";
 
 interface ISortContactsProps {
   contacts: IContact[];
-  order: string;
+  order: "asc" | "desc";
 }
 
-export function sortContacts({ contacts, order }: ISortContactsProps) {
+export function sortContactsByName({ contacts, order }: ISortContactsProps) {
   return contacts.sort((a, b) => {
     if (order === "asc") {
       return a.name.localeCompare(b.name);
