@@ -21,18 +21,18 @@ const contactFormSchema = z.object({
   category: z.string().min(1, { message: "Selecione uma categoria." })
 });
 
-export type contactFormData = z.infer<typeof contactFormSchema>;
+export type ContactFormData = z.infer<typeof contactFormSchema>;
 const Form = () => {
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors, isSubmitting, isValid }
-  } = useForm<contactFormData>({
+  } = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema)
   });
 
-  const onSubmit = async (data: contactFormData) => {
+  const onSubmit = async (data: ContactFormData) => {
     // eslint-disable-next-line no-console
     console.log(data);
     reset();
