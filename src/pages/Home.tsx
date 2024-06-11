@@ -7,34 +7,40 @@ import {
   ContactTable,
   Container,
   Flex,
-  Header
+  Header,
+  Loader
 } from "@/components";
 
 import { PATHS } from "@/utils/common/constant/paths";
 
 import { IContact } from "@/components/ContactTable/types";
 import { sortContactsByName } from "@/utils/common/functions/sortContactsByName";
+import axiosService from "@/utils/common/services/axiosService";
 
 const HomePage = () => {
   const [contacts, setContacts] = useState<IContact[]>([]);
   const [order, setOrder] = useState<"asc" | "desc">("asc");
   const [searchTerm, setSearchTerm] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
-  function toggleSortByName() {
+  const toggleSortByName = useCallback(() => {
     setOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
-  }
+  }, [setOrder]);
 
   const fetchContacts = useCallback(async () => {
-    fetch("http://localhost:3000/api/contacts")
-      .then(async (response) => {
-        const data: IContact[] = await response.json();
-        setContacts(data);
-      })
-      .catch(console.error);
+    try {
+      const { data } = await axiosService.get<IContact[]>("contacts");
+
+      setContacts(data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
   }, []);
 
   useEffect(() => {
     const controller = new AbortController();
+
     fetchContacts();
 
     return () => {
@@ -54,6 +60,8 @@ const HomePage = () => {
 
   return (
     <Container>
+      {isLoading && <Loader />}
+
       <Box>
         <Header hasSearchForm onSetSearchTerm={setSearchTerm} />
 
