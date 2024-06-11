@@ -2,11 +2,17 @@ import ReactDOM from "react-dom";
 
 import * as S from "./styles";
 
-const Loader = () => {
+import { ILoaderProps } from "./types";
+
+const Loader = ({ isLoading }: ILoaderProps) => {
   return ReactDOM.createPortal(
-    <S.Overlay>
-      <S.Spinner />
-    </S.Overlay>,
+    <>
+      {isLoading && (
+        <S.Overlay>
+          <S.Spinner />
+        </S.Overlay>
+      )}
+    </>,
     document.getElementById("loader-root")!
   );
 };

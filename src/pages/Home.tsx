@@ -32,9 +32,10 @@ const HomePage = () => {
       const { data } = await axiosService.get<IContact[]>("contacts");
 
       setContacts(data);
-      setIsLoading(false);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 
@@ -60,7 +61,7 @@ const HomePage = () => {
 
   return (
     <Container>
-      {isLoading && <Loader />}
+      <Loader isLoading={isLoading} />
 
       <Box>
         <Header hasSearchForm onSetSearchTerm={setSearchTerm} />
