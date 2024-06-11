@@ -1,4 +1,4 @@
-import { CaretDown, CaretUp } from "phosphor-react";
+import { AddressBook, CaretDown, CaretUp } from "phosphor-react";
 
 import { Badge, DropdownMenu, Flex } from "@/components";
 
@@ -17,30 +17,30 @@ const ContactTable = ({
     <S.TableContainer>
       <Flex direction="column" align="stretch" gap="$4">
         <S.TableWrapper>
-          <S.Table>
-            <thead>
-              <tr>
-                <th onClick={onSortByName} style={{ cursor: "pointer" }}>
-                  <Flex align="center" gap="$1">
-                    Nome
-                    <Flex direction="column">
-                      {order === "asc" ? (
-                        <CaretUp size={14} weight="bold" />
-                      ) : (
-                        <CaretDown size={14} weight="bold" />
-                      )}
+          {contacts.length > 0 ? (
+            <S.Table>
+              <thead>
+                <tr>
+                  <th onClick={onSortByName} style={{ cursor: "pointer" }}>
+                    <Flex align="center" gap="$1">
+                      Nome
+                      <Flex direction="column">
+                        {order === "asc" ? (
+                          <CaretUp size={14} weight="bold" />
+                        ) : (
+                          <CaretDown size={14} weight="bold" />
+                        )}
+                      </Flex>
                     </Flex>
-                  </Flex>
-                </th>
-                <th>Telefone</th>
-                <th>E-mail</th>
-                <th>Categoria</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-            <tbody>
-              {contacts.length > 0 &&
-                contacts.map((contact) => (
+                  </th>
+                  <th>Telefone</th>
+                  <th>E-mail</th>
+                  <th>Categoria</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                {contacts.map((contact) => (
                   <tr key={contact.id}>
                     <td>{contact.name}</td>
                     <td>{formatPhoneNumber(contact.phone)}</td>
@@ -56,8 +56,14 @@ const ContactTable = ({
                     </td>
                   </tr>
                 ))}
-            </tbody>
-          </S.Table>
+              </tbody>
+            </S.Table>
+          ) : (
+            <S.ContactsNotFound>
+              <AddressBook size={64} />
+              <strong>Você não tem nenhum contato.</strong>
+            </S.ContactsNotFound>
+          )}
         </S.TableWrapper>
       </Flex>
     </S.TableContainer>
