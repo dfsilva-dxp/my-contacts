@@ -7,7 +7,7 @@ import * as S from "./styles";
 
 import { IModalProps } from "./types";
 
-const Modal = ({ danger = false }: IModalProps) => {
+const Modal = ({ danger = false, contact_name }: IModalProps) => {
   return (
     <Dialog.Portal>
       <S.DialogOverlay />
@@ -16,7 +16,7 @@ const Modal = ({ danger = false }: IModalProps) => {
         <Flex align="flex-start" justify="space-between">
           <S.DialogTitle className={danger ? "danger" : ""}>
             Tem certeza que deseja remover o <br />
-            contato ”Daniel Silva”?
+            contato {`"${contact_name}"`}?
           </S.DialogTitle>
 
           <Dialog.Close asChild>

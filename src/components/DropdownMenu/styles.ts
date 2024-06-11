@@ -3,8 +3,9 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
 export const DropdownMenuContent = styled(DropdownMenu.Content)`
   ${({ theme }) => css`
+    margin-top: -0.5rem;
     background-color: ${theme.colors.primary.lighter};
-    min-width: 3.125rem;
+    min-width: 4rem;
     border: 1px solid transparent;
     border-radius: 0.5rem;
     padding: 0.3125rem;
