@@ -61,7 +61,7 @@ const ContactTable = ({
           ) : (
             <S.ContactsNotFound>
               <AddressBook size={64} />
-              <strong>Você não tem nenhum contato.</strong>
+              <strong>Não foi encontrado nenhum contato.</strong>
             </S.ContactsNotFound>
           )}
         </S.TableWrapper>

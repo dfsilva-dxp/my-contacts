@@ -11,11 +11,12 @@ import {
   Loader
 } from "@/components";
 
+import contactsService from "@/services/contactsService";
+
 import { PATHS } from "@/utils/common/constant/paths";
+import { sortContactsByName } from "@/utils/common/functions/sortContactsByName";
 
 import { IContact } from "@/components/ContactTable/types";
-import { sortContactsByName } from "@/utils/common/functions/sortContactsByName";
-import axiosService from "@/utils/common/services/axiosService";
 
 const HomePage = () => {
   const [contacts, setContacts] = useState<IContact[]>([]);
@@ -29,9 +30,9 @@ const HomePage = () => {
 
   const fetchContacts = useCallback(async () => {
     try {
-      const { data } = await axiosService.get<IContact[]>("contacts");
-
-      setContacts(data);
+      setIsLoading(true);
+      const response = await contactsService.listContacts();
+      setContacts(response);
     } catch (error) {
       console.error(error);
     } finally {
@@ -41,7 +42,6 @@ const HomePage = () => {
 
   useEffect(() => {
     const controller = new AbortController();
-
     fetchContacts();
 
     return () => {
