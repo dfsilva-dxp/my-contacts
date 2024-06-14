@@ -5,7 +5,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 
 import { Button, Modal } from "@/components";
 
-import { PATHS } from "@/utils/common/constant/paths";
+import { ENDPOINTS } from "@/utils/common/constant/endpoints";
 
 import * as S from "./styles";
 
@@ -31,7 +31,7 @@ const DropdownMenu = ({ contact_id, contact_name }: IDropdownMenuProps) => {
         <Dropdown.Portal>
           <S.DropdownMenuContent sideOffset={5} aria-label="profile menu">
             <S.DropdownMenuItem>
-              <Link to={`${PATHS.EDIT}/${contact_id}`} className="blue">
+              <Link to={`${ENDPOINTS.EDIT}/${contact_id}`} className="blue">
                 <PencilLine size={14} weight="bold" />
               </Link>
             </S.DropdownMenuItem>

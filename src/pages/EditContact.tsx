@@ -1,13 +1,13 @@
 import { Box, Breadcrumb, Container, Form, Header } from "@/components";
 
-import { PATHS } from "@/utils/common/constant/paths";
+import { ENDPOINTS } from "@/utils/common/constant/endpoints";
 
 const EditContactPage = () => {
   return (
     <Container>
       <Box>
         <Header />
-        <Breadcrumb title="Editar Daniel Silva" url={PATHS.HOME} />
+        <Breadcrumb title="Editar Daniel Silva" url={ENDPOINTS.HOME} />
         <Form />
       </Box>
     </Container>
