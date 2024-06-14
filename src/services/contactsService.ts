@@ -1,10 +1,10 @@
-import { IContact } from "@/components/ContactTable/types";
-import axiosService from "@/utils/common/services/axiosService";
+import httpClient from "@/utils/common/services/httpClient";
+
+import { PATHS } from "@/utils/common/constant/paths";
 
 class ContactsService {
   async listContacts() {
-    const { data } = await axiosService.get<IContact[]>("contacts");
-    return data;
+    return httpClient.get(PATHS.CONTACTS);
   }
 }
 

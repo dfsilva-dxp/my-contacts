@@ -13,7 +13,7 @@ import {
 
 import contactsService from "@/services/contactsService";
 
-import { PATHS } from "@/utils/common/constant/paths";
+import { ENDPOINTS } from "@/utils/common/constant/endpoints";
 import { sortContactsByName } from "@/utils/common/functions/sortContactsByName";
 
 import { IContact } from "@/components/ContactTable/types";
@@ -77,7 +77,7 @@ const HomePage = () => {
             </strong>
           </small>
 
-          <Link to={PATHS.NEW}>
+          <Link to={ENDPOINTS.NEW}>
             <Button size="small" variant="ghost" as="span">
               Novo contato
             </Button>

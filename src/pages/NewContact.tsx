@@ -1,13 +1,13 @@
 import { Box, Breadcrumb, Container, Form, Header } from "@/components";
 
-import { PATHS } from "@/utils/common/constant/paths";
+import { ENDPOINTS } from "@/utils/common/constant/endpoints";
 
 const NewContactPage = () => {
   return (
     <Container>
       <Box>
         <Header />
-        <Breadcrumb title="Novo Contato" url={PATHS.HOME} />
+        <Breadcrumb title="Novo Contato" url={ENDPOINTS.HOME} />
         <Form />
       </Box>
     </Container>
