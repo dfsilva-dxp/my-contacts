@@ -1,4 +1,5 @@
 import { AxiosInstance } from "axios";
+
 import AxiosService from "./axiosService";
 
 import { IContact } from "@/components/ContactTable/types";

@@ -2,7 +2,7 @@ import { AddressBook, CaretDown, CaretUp } from "phosphor-react";
 
 import { Badge, DropdownMenu, Flex } from "@/components";
 
-import { formatPhoneNumber } from "@/utils/common/functions/formatPhoneNumber";
+import { formatPhoneNumber } from "@/utils/common/fn/formatPhoneNumber";
 
 import * as S from "./styles";
 

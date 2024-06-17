@@ -14,7 +14,8 @@ import {
 import contactsService from "@/services/contactsService";
 
 import { ENDPOINTS } from "@/utils/common/constant/endpoints";
-import { sortContactsByName } from "@/utils/common/functions/sortContactsByName";
+import { sortContactsByName } from "@/utils/common/fn/sortContactsByName";
+import { handleError } from "@/utils/common/fn/handleErrors";
 
 import { IContact } from "@/components/ContactTable/types";
 
@@ -34,7 +35,7 @@ const HomePage = () => {
       const response = await contactsService.listContacts();
       setContacts(response);
     } catch (error) {
-      console.error(error);
+      handleError(error);
     } finally {
       setIsLoading(false);
     }
