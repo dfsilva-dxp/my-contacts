@@ -4,7 +4,7 @@ import { ToastContainer } from "react-toastify";
 
 import { DefaultRoutes } from "@/routes";
 
-import { DefaultTheme, GlobalStyles } from "@/styles";
+import { DefaultTheme, GlobalStyles } from "@/presenter/styles";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {

@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Button, Input, Select } from "@/components";
+import { Button, Input, Select } from "@/presenter/components";
 
 import * as S from "./styles";
 

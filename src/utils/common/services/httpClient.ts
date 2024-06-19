@@ -2,7 +2,7 @@ import { AxiosInstance } from "axios";
 
 import AxiosService from "./axiosService";
 
-import { IContact } from "@/components/ContactTable/types";
+import { IContact } from "@/presenter/components/ContactTable/types";
 
 class HttpClient {
   axiosService: AxiosService;

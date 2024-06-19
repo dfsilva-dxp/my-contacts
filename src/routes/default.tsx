@@ -5,7 +5,7 @@ import {
   HomePage,
   NewContactPage,
   NotFoundPage
-} from "@/pages";
+} from "@/presenter/pages";
 
 import { ROUTES } from "@/utils/common/constant/routes";
 const DefaultRoutes = () => {

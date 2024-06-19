@@ -1,4 +1,10 @@
-import { Box, Breadcrumb, Container, Form, Header } from "@/components";
+import {
+  Box,
+  Breadcrumb,
+  Container,
+  Form,
+  Header
+} from "@/presenter/components";
 
 import { ENDPOINTS } from "@/utils/common/constant/endpoints";
 

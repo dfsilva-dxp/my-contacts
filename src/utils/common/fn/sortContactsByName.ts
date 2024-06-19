@@ -1,4 +1,4 @@
-import { IContact } from "@/components/ContactTable/types";
+import { IContact } from "@/presenter/components/ContactTable/types";
 
 interface ISortContactsProps {
   contacts: IContact[];

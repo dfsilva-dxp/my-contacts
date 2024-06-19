@@ -9,7 +9,7 @@ import {
   Flex,
   Header,
   Loader
-} from "@/components";
+} from "@/presenter/components";
 
 import contactsService from "@/services/contactsService";
 
@@ -17,7 +17,7 @@ import { ENDPOINTS } from "@/utils/common/constant/endpoints";
 import { sortContactsByName } from "@/utils/common/fn/sortContactsByName";
 import { handleError } from "@/utils/common/fn/handleErrors";
 
-import { IContact } from "@/components/ContactTable/types";
+import { IContact } from "@/presenter/components/ContactTable/types";
 
 const HomePage = () => {
   const [contacts, setContacts] = useState<IContact[]>([]);

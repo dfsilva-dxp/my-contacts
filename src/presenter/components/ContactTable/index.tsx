@@ -1,6 +1,6 @@
 import { AddressBook, CaretDown, CaretUp } from "phosphor-react";
 
-import { Badge, DropdownMenu, Flex } from "@/components";
+import { Badge, DropdownMenu, Flex } from "@/presenter/components";
 
 import { formatPhoneNumber } from "@/utils/common/fn/formatPhoneNumber";
 

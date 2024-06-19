@@ -3,7 +3,7 @@ import * as Dropdown from "@radix-ui/react-dropdown-menu";
 import { DotsThreeVertical, PencilLine, Trash } from "phosphor-react";
 import * as Dialog from "@radix-ui/react-dialog";
 
-import { Button, Modal } from "@/components";
+import { Button, Modal } from "@/presenter/components";
 
 import { ENDPOINTS } from "@/utils/common/constant/endpoints";
 

@@ -1,7 +1,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { X } from "phosphor-react";
 
-import { Button, Flex } from "@/components";
+import { Button, Flex } from "@/presenter/components";
 
 import * as S from "./styles";
 

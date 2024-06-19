@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { CaretLeft } from "phosphor-react";
 
-import { Flex } from "@/components";
+import { Flex } from "@/presenter/components";
 
 import * as S from "./styles";
 

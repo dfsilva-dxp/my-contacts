@@ -1,9 +1,8 @@
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 
-import { ReactComponent as Logo } from "@assets/image/svg/logo.svg";
+import { ReactComponent as Logo } from "@/presenter/assets/image/svg/logo.svg";
 
-import { Input } from "@/components";
-import Flex from "@components/Flex";
+import { Input, Flex } from "@/presenter/components";
 
 interface IHeaderProps {
   hasSearchForm?: boolean;
