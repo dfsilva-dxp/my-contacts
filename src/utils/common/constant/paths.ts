@@ -1,5 +1,3 @@
 export const PATHS = {
-  HOME: "/",
-  NEW: "/new-contact",
-  EDIT: "/edit-contact"
+  CONTACTS: "contacts"
 } as const;

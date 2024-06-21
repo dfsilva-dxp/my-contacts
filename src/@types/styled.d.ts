@@ -1,6 +1,6 @@
 import "styled-components";
 
-import { DefaultTheme } from "../styles";
+import { DefaultTheme } from "@/presenter/styles";
 
 type ThemeType = typeof DefaultTheme;
 

@@ -1,10 +1,20 @@
 import axios from "axios";
 
-const axiosService = axios.create({
-  baseURL: "http://localhost:3000/api/",
-  headers: {
-    "Content-Type": "application/json"
-  }
-});
+class AxiosService {
+  baseURL: string;
 
-export default axiosService;
+  constructor(baseURL: string) {
+    this.baseURL = baseURL;
+  }
+
+  create() {
+    return axios.create({
+      baseURL: this.baseURL,
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+  }
+}
+
+export default AxiosService;
