@@ -1,6 +1,11 @@
-import { AddressBook, CaretDown, CaretUp } from "phosphor-react";
+import { CaretDown, CaretUp } from "phosphor-react";
 
-import { Badge, DropdownMenu, Flex } from "@/presenter/components";
+import {
+  Badge,
+  ContactNotFoundComponent,
+  DropdownMenu,
+  Flex
+} from "@/presenter/components";
 
 import { formatPhoneNumber } from "@/utils/common/fn/formatPhoneNumber";
 
@@ -59,10 +64,7 @@ const ContactTable = ({
               </tbody>
             </S.Table>
           ) : (
-            <S.ContactsNotFound>
-              <AddressBook size={64} />
-              <strong>Não foi encontrado nenhum contato.</strong>
-            </S.ContactsNotFound>
+            <ContactNotFoundComponent />
           )}
         </S.TableWrapper>
       </Flex>
