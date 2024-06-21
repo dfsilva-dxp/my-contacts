@@ -21,6 +21,7 @@ const HomeView = () => {
     order,
     isLoading,
     hasError,
+    getContacts,
     setSearchTerm,
     toggleSortByName
   } = DI.resolve("homeViewModel");
@@ -64,7 +65,7 @@ const HomeView = () => {
             onSortByName={toggleSortByName}
           />
         ) : (
-          <HasErrorComponent />
+          <HasErrorComponent handleClick={getContacts} />
         )}
       </Box>
     </Container>

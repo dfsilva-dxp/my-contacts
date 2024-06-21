@@ -14,6 +14,7 @@ type Response = {
   order: "asc" | "desc";
   isLoading: boolean;
   hasError: boolean;
+  getContacts: () => Promise<void>;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
   toggleSortByName: () => void;
 };
@@ -64,6 +65,7 @@ export const useContactsListViewModel = ({
     order,
     isLoading,
     hasError,
+    getContacts,
     setSearchTerm,
     toggleSortByName
   };
