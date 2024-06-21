@@ -4,9 +4,9 @@ import { toast } from "react-toastify";
 import { ERROR_MESSAGE } from "../constant/errorMessage";
 
 type ErrorMessage =
-  | "Item deletado com sucesso"
-  | "Nome do contato é obrigatório."
-  | "Este e-mail já está cadastrado para outro contato."
+  | "Item deletado com sucesso."
+  | "O nome do contato é obrigatório."
+  | "Este e-mail já está cadastrado para outro contato. Tente novamente com um e-mail diferente."
   | "Contato não encontrado. Por favor, verifique os dados da consulta."
   | "Categoria não encontrado. Por favor, verifique os dados da consulta.";
 
@@ -22,7 +22,7 @@ export function handleError(error: unknown): boolean {
     const headers = response?.headers;
 
     if (headers && headers["content-type"]?.includes("text/html")) {
-      toast.error("404 Not Found");
+      toast.error("Ocorreu um erro inesperado :(");
       return false;
     }
 
