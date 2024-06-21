@@ -1,16 +1,9 @@
-interface IContact {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  category_id: string | null;
-  category_name: string | null;
-}
+import { Contact } from "@/domain/model/Contacts";
 
 interface IContactTableProps {
-  contacts: IContact[];
+  contacts: Contact[];
   onSortByName(): void;
   order: "asc" | "desc";
 }
 
-export { IContactTableProps, IContact };
+export { IContactTableProps };

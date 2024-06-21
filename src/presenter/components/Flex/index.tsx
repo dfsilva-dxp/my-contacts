@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { HTMLAttributes, ReactNode } from "react";
 
 import * as S from "./styles";
 
@@ -10,7 +10,8 @@ const Flex = ({
   justify = "flex-start",
   content = "stretch",
   wrap = "wrap",
-  gap = "$0"
+  gap = "$0",
+  ...props
 }: IFlexProps) => {
   const selectedGap = EGap[gap];
 
@@ -23,6 +24,7 @@ const Flex = ({
       content={content}
       wrap={wrap}
       gap={selectedGap}
+      {...props}
     >
       {children}
     </S.FlexContent>
@@ -46,7 +48,7 @@ enum EGap {
   $11 = "2rem"
 }
 
-export interface IFlexProps {
+export interface IFlexProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   display?: "none" | "inline-flex" | "flex";
   direction?: "row" | "column" | "row-reverse" | "column-reverse";

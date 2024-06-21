@@ -7,6 +7,7 @@ export { default as Container } from "@/presenter/components/Container";
 export { default as DropdownMenu } from "@/presenter/components/DropdownMenu";
 export { default as Flex } from "@/presenter/components/Flex";
 export { default as Form } from "@/presenter/components/Form";
+export { default as HasErrorComponent } from "@/presenter/components/HasErrorComponent";
 export { default as Header } from "@/presenter/components/Header";
 export { default as Input } from "@/presenter/components/Input";
 export { default as Loader } from "@/presenter/components/Loader";
