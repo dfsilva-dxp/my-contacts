@@ -1,11 +1,6 @@
 import { CaretDown, CaretUp } from "phosphor-react";
 
-import {
-  Badge,
-  ContactNotFoundComponent,
-  DropdownMenu,
-  Flex
-} from "@/presenter/components";
+import { Badge, DropdownMenu, Flex } from "@/presenter/components";
 
 import { formatPhoneNumber } from "@/utils/common/fn/formatPhoneNumber";
 
@@ -22,7 +17,7 @@ const ContactTable = ({
     <S.TableContainer>
       <Flex direction="column" align="stretch" gap="$4">
         <S.TableWrapper>
-          {contacts.length > 0 ? (
+          {contacts.length > 0 && (
             <S.Table>
               <thead>
                 <tr>
@@ -63,8 +58,6 @@ const ContactTable = ({
                 ))}
               </tbody>
             </S.Table>
-          ) : (
-            <ContactNotFoundComponent />
           )}
         </S.TableWrapper>
       </Flex>

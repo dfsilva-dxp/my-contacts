@@ -6,7 +6,15 @@ import * as S from "./styles";
 
 const ContactNotFoundComponent = () => {
   return (
-    <Flex direction="column" align="center" justify="center" gap="$4">
+    <Flex
+      direction="column"
+      align="center"
+      justify="center"
+      gap="$4"
+      style={{
+        padding: "1rem 0"
+      }}
+    >
       <EmptyBox />
 
       <S.NotFoundMessage>

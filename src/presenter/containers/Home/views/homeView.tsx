@@ -4,6 +4,7 @@ import { DI } from "@/di/ioc";
 import {
   Box,
   Button,
+  ContactNotFoundComponent,
   ContactTable,
   Container,
   Flex,
@@ -14,6 +15,7 @@ import {
 
 import { ENDPOINTS } from "@/utils/common/constant/endpoints";
 import { sortContactsByName } from "@/utils/common/fn/sortContactsByName";
+import { ContactsListViewModelResponse } from "../view-models/homeViewModel";
 
 const HomeView = () => {
   const {
@@ -24,7 +26,7 @@ const HomeView = () => {
     getContacts,
     setSearchTerm,
     toggleSortByName
-  } = DI.resolve("homeViewModel");
+  } = DI.resolve<ContactsListViewModelResponse>("homeViewModel");
 
   return (
     <Container>
@@ -55,7 +57,7 @@ const HomeView = () => {
           </Link>
         </Flex>
 
-        {!hasError ? (
+        {contacts.length > 0 ? (
           <ContactTable
             contacts={sortContactsByName({
               contacts: [...contacts],
@@ -64,6 +66,8 @@ const HomeView = () => {
             order={order}
             onSortByName={toggleSortByName}
           />
+        ) : !hasError ? (
+          <ContactNotFoundComponent />
         ) : (
           <HasErrorComponent handleClick={getContacts} />
         )}

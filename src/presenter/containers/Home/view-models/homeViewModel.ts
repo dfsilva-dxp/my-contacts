@@ -5,7 +5,7 @@ import { UseCase } from "@/domain/model/types";
 
 import { handleError } from "@/utils/common/fn/handleErrors";
 
-type Response = {
+export type ContactsListViewModelResponse = {
   contacts: Contact[];
   order: "asc" | "desc";
   isLoading: boolean;
@@ -21,7 +21,7 @@ type Dependencies = {
 
 export const useContactsListViewModel = ({
   getContactsUseCase
-}: Dependencies): Response => {
+}: Dependencies): ContactsListViewModelResponse => {
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [order, setOrder] = useState<"asc" | "desc">("asc");
   const [searchTerm, setSearchTerm] = useState("");
