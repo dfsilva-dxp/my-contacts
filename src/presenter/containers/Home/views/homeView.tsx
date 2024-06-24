@@ -4,9 +4,9 @@ import { DI } from "@/di/ioc";
 import {
   Box,
   Button,
-  ContactNotFoundComponent,
   ContactTable,
   Container,
+  EmptyContactList,
   Flex,
   HasErrorComponent,
   Header,
@@ -67,7 +67,7 @@ const HomeView = () => {
             onSortByName={toggleSortByName}
           />
         ) : !hasError ? (
-          <ContactNotFoundComponent />
+          <EmptyContactList />
         ) : (
           <HasErrorComponent handleClick={getContacts} />
         )}

@@ -4,7 +4,7 @@ import { ReactComponent as EmptyBox } from "@/presenter/assets/image/svg/empty-b
 
 import * as S from "./styles";
 
-const ContactNotFoundComponent = () => {
+const EmptyContactList = () => {
   return (
     <Flex
       direction="column"
@@ -25,4 +25,4 @@ const ContactNotFoundComponent = () => {
   );
 };
 
-export default ContactNotFoundComponent;
+export default EmptyContactList;
