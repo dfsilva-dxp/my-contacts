@@ -8,6 +8,7 @@ import { handleError } from "@/utils/common/fn/handleErrors";
 export type ContactsListViewModelResponse = {
   contacts: Contact[];
   order: "asc" | "desc";
+  searchTerm: string;
   isLoading: boolean;
   hasError: boolean;
   getContacts: () => Promise<void>;
@@ -71,6 +72,7 @@ export const useContactsListViewModel = ({
   return {
     contacts: filteredContacts,
     order,
+    searchTerm,
     isLoading,
     hasError,
     getContacts,

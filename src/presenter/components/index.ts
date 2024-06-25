@@ -2,6 +2,7 @@ export { default as Badge } from "@/presenter/components/Badge";
 export { default as Box } from "@/presenter/components/Box";
 export { default as Breadcrumb } from "@/presenter/components/Breadcrumb";
 export { default as Button } from "@/presenter/components/Button";
+export { default as ContactNotFound } from "@/presenter/components/ContactNotFound";
 export { default as ContactTable } from "@/presenter/components/ContactTable";
 export { default as Container } from "@/presenter/components/Container";
 export { default as DropdownMenu } from "@/presenter/components/DropdownMenu";

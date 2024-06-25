@@ -4,6 +4,7 @@ import { DI } from "@/di/ioc";
 import {
   Box,
   Button,
+  ContactNotFound,
   ContactTable,
   Container,
   EmptyContactList,
@@ -21,6 +22,7 @@ const HomeView = () => {
   const {
     contacts,
     order,
+    searchTerm,
     isLoading,
     hasError,
     getContacts,
@@ -34,7 +36,7 @@ const HomeView = () => {
 
       <Box>
         <Header
-          hasSearchForm={hasError || contacts.length > 0}
+          hasSearchForm={!hasError || contacts.length > 0}
           onSetSearchTerm={setSearchTerm}
         />
 
@@ -46,7 +48,7 @@ const HomeView = () => {
             paddingBottom: "1rem"
           }}
         >
-          {!hasError && !!contacts.length && (
+          {!hasError && (
             <small
               style={{
                 flex: 1
@@ -64,17 +66,24 @@ const HomeView = () => {
           </Link>
         </Flex>
 
-        {contacts.length > 0 ? (
-          <ContactTable
-            contacts={sortContactsByName({
-              contacts: [...contacts],
-              order
-            })}
-            order={order}
-            onSortByName={toggleSortByName}
-          />
-        ) : !hasError ? (
-          <EmptyContactList />
+        {!hasError ? (
+          <>
+            {contacts.length > 0 && (
+              <ContactTable
+                contacts={sortContactsByName({
+                  contacts: [...contacts],
+                  order
+                })}
+                order={order}
+                onSortByName={toggleSortByName}
+              />
+            )}
+
+            {contacts.length < 1 && !searchTerm && <EmptyContactList />}
+            {contacts.length < 1 && !!searchTerm && (
+              <ContactNotFound searchTerm={searchTerm} />
+            )}
+          </>
         ) : (
           <HasErrorComponent handleClick={getContacts} />
         )}
