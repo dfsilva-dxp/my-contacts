@@ -35,12 +35,14 @@ export const useContactsListViewModel = ({
   const getContacts = useCallback(async () => {
     try {
       setIsLoading(true);
+
       const response = await getContactsUseCase.execute();
+
       setContacts(response);
       setHasError(false);
     } catch (error) {
-      handleError(error);
       setHasError(true);
+      handleError(error);
     } finally {
       setIsLoading(false);
     }

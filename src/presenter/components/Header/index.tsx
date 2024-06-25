@@ -19,7 +19,15 @@ const Header = ({ hasSearchForm = false, onSetSearchTerm }: IHeaderProps) => {
   }
 
   return (
-    <Flex direction="column" align="stretch" justify="center" gap="$4">
+    <Flex
+      direction="column"
+      align="stretch"
+      justify="center"
+      gap="$4"
+      style={{
+        paddingBottom: "1rem"
+      }}
+    >
       <Flex justify="center">
         <Logo />
       </Flex>

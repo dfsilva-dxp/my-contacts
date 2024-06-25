@@ -33,23 +33,30 @@ const HomeView = () => {
       <Loader isLoading={isLoading} />
 
       <Box>
-        <Header hasSearchForm onSetSearchTerm={setSearchTerm} />
+        <Header
+          hasSearchForm={hasError || contacts.length > 0}
+          onSetSearchTerm={setSearchTerm}
+        />
 
         <Flex
           align="center"
-          justify="space-between"
+          justify="center"
           style={{
             borderBottom: "1px solid #E6E6E6",
             paddingBottom: "1rem"
           }}
         >
-          <small>
-            <strong>
-              {contacts.length > 0 &&
-                `${String(contacts.length).padStart(2, "00")} contatos`}
-            </strong>
-          </small>
-
+          {!hasError && !!contacts.length && (
+            <small
+              style={{
+                flex: 1
+              }}
+            >
+              <strong>
+                {String(contacts.length).padStart(2, "00")} contatos
+              </strong>
+            </small>
+          )}
           <Link to={ENDPOINTS.NEW}>
             <Button size="small" variant="ghost" as="span">
               Novo contato
