@@ -4,8 +4,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button, Input, Select } from "@/presenter/components";
 
-import * as S from "./styles";
 import { DI } from "@/di/ioc";
+
+import * as S from "./styles";
+
+import { NewContactViewModelResponse } from "@/presenter/containers/NewContact/view-models/newContactViewModel";
 
 const contactFormSchema = z.object({
   name: z
@@ -27,7 +30,9 @@ const Form = () => {
     resolver: zodResolver(contactFormSchema)
   });
 
-  const { categories } = DI.resolve("newCategoriesViewModel");
+  const { categories } = DI.resolve<NewContactViewModelResponse>(
+    "newCategoriesViewModel"
+  );
 
   const onSubmit = async (data: ContactFormData) => {
     // eslint-disable-next-line no-console

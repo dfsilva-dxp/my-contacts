@@ -25,6 +25,7 @@ const SelectInput: ForwardRefRenderFunction<SelectElement, SelectProps> = (
         onValueChange={(value) =>
           onChange && onChange({ target: { name, value } })
         }
+        disabled={options.length < 1}
       >
         <S.SelectTriggerContent
           aria-label="Categories"
@@ -32,7 +33,9 @@ const SelectInput: ForwardRefRenderFunction<SelectElement, SelectProps> = (
           tabIndex={4}
           $hasError={!!errorMessage}
         >
-          <Select.Value placeholder={placeholder} />
+          <Select.Value
+            placeholder={options.length > 0 ? placeholder : "Carregando..."}
+          />
 
           <S.SelectIcon>
             <CaretDown weight="bold" />
@@ -49,15 +52,16 @@ const SelectInput: ForwardRefRenderFunction<SelectElement, SelectProps> = (
               <S.SelectGroup>
                 {!!selectLabel && <S.SelectLabel>Categorias</S.SelectLabel>}
 
-                {options.map((item) => (
-                  <S.SelectItem value={item.name} key={item.id}>
-                    <Select.ItemText>{item.name}</Select.ItemText>
+                {!!options.length &&
+                  options.map((item) => (
+                    <S.SelectItem value={item.name} key={item.id}>
+                      <Select.ItemText>{item.name}</Select.ItemText>
 
-                    <Select.ItemIndicator>
-                      <Check weight="bold" />
-                    </Select.ItemIndicator>
-                  </S.SelectItem>
-                ))}
+                      <Select.ItemIndicator>
+                        <Check weight="bold" />
+                      </Select.ItemIndicator>
+                    </S.SelectItem>
+                  ))}
               </S.SelectGroup>
             </S.SelectViewport>
 

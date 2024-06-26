@@ -5,13 +5,19 @@ import { UseCase } from "@/domain/model/types";
 
 import { handleError } from "@/utils/common/fn/handleErrors";
 
+export type NewContactViewModelResponse = {
+  categories: Category[];
+  isLoading: boolean;
+  hasError: boolean;
+};
+
 type Dependencies = {
   readonly getCategoriesUseCase: UseCase<Category[]>;
 };
 
 export const useNewContactViewModel = ({
   getCategoriesUseCase
-}: Dependencies) => {
+}: Dependencies): NewContactViewModelResponse => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
@@ -22,7 +28,10 @@ export const useNewContactViewModel = ({
 
       const response = await getCategoriesUseCase.execute();
 
-      setCategories(response);
+      if (response.length > 0) {
+        setCategories(response);
+      }
+
       setHasError(false);
     } catch (error) {
       setHasError(true);
