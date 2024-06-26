@@ -1,23 +1,7 @@
-import {
-  Box,
-  Breadcrumb,
-  Container,
-  Form,
-  Header
-} from "@/presenter/components";
-
-import { ENDPOINTS } from "@/utils/common/constant/endpoints";
+import NewContactView from "../containers/NewContact/views/newContactView";
 
 const NewContactPage = () => {
-  return (
-    <Container>
-      <Box>
-        <Header />
-        <Breadcrumb title="Novo Contato" url={ENDPOINTS.HOME} />
-        <Form />
-      </Box>
-    </Container>
-  );
+  return <NewContactView />;
 };
 
 export default NewContactPage;

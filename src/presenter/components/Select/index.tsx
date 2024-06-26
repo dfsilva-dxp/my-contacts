@@ -50,8 +50,8 @@ const SelectInput: ForwardRefRenderFunction<SelectElement, SelectProps> = (
                 {!!selectLabel && <S.SelectLabel>Categorias</S.SelectLabel>}
 
                 {options.map((item) => (
-                  <S.SelectItem value={item.value} key={item.value}>
-                    <Select.ItemText>{item.label}</Select.ItemText>
+                  <S.SelectItem value={item.name} key={item.id}>
+                    <Select.ItemText>{item.name}</Select.ItemText>
 
                     <Select.ItemIndicator>
                       <Check weight="bold" />
