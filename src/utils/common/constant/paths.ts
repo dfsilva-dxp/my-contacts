@@ -1,8 +1,4 @@
 export const PATHS = {
-  CONTACTS: {
-    ALL: "contacts"
-  },
-  CATEGORIES: {
-    ALL: "categories"
-  }
+  CONTACTS: "contacts",
+  CATEGORIES: "categories"
 } as const;
