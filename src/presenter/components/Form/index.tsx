@@ -20,7 +20,17 @@ const contactFormSchema = z.object({
 });
 
 export type ContactFormData = z.infer<typeof contactFormSchema>;
-const Form = () => {
+
+type Dependencies = {
+  whenSubmit: ({
+    name,
+    email,
+    phone,
+    category
+  }: ContactFormData) => Promise<void>;
+};
+
+const Form = ({ whenSubmit }: Dependencies) => {
   const {
     register,
     handleSubmit,
@@ -37,6 +47,7 @@ const Form = () => {
   const onSubmit = async (data: ContactFormData) => {
     // eslint-disable-next-line no-console
     console.log(data);
+    whenSubmit(data);
     reset();
   };
 
