@@ -6,7 +6,7 @@ import { ERROR_MESSAGE } from "../constant/errorMessage";
 type ErrorMessage =
   | "Item deletado com sucesso."
   | "O nome do contato é obrigatório."
-  | "Este e-mail já está cadastrado para outro contato. Tente novamente com um e-mail diferente."
+  | "Este e-mail já está cadastrado."
   | "Contato não encontrado. Por favor, verifique os dados da consulta."
   | "Categoria não encontrado. Por favor, verifique os dados da consulta.";
 
