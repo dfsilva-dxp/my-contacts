@@ -8,3 +8,5 @@ export interface Contact {
   readonly category_id: string | null;
   readonly category_name: string | null;
 }
+
+export type ContactResponse = Omit<Contact, "category_name">;

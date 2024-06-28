@@ -54,7 +54,7 @@ const SelectInput: ForwardRefRenderFunction<SelectElement, SelectProps> = (
 
                 {!!options.length &&
                   options.map((item) => (
-                    <S.SelectItem value={item.name} key={item.id}>
+                    <S.SelectItem value={item.id} key={item.id}>
                       <Select.ItemText>{item.name}</Select.ItemText>
 
                       <Select.ItemIndicator>

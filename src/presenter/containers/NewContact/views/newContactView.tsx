@@ -1,3 +1,5 @@
+import { DI } from "@/di/ioc";
+
 import {
   Box,
   Breadcrumb,
@@ -7,14 +9,19 @@ import {
 } from "@/presenter/components";
 
 import { ENDPOINTS } from "@/utils/common/constant/endpoints";
+import { NewContactViewModelResponse } from "../view-models/newContactViewModel";
 
 const NewContactView = () => {
+  const { categories, createContact } = DI.resolve<NewContactViewModelResponse>(
+    "newCategoriesViewModel"
+  );
+
   return (
     <Container>
       <Box>
         <Header />
         <Breadcrumb title="Novo Contato" url={ENDPOINTS.HOME} />
-        <Form />
+        <Form whenSubmit={createContact} categories={categories} />
       </Box>
     </Container>
   );
