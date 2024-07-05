@@ -1,3 +1,4 @@
 export const PATHS = {
-  CONTACTS: "contacts"
+  CONTACTS: "contacts",
+  CATEGORIES: "categories"
 } as const;

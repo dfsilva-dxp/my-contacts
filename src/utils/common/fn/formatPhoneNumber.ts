@@ -11,3 +11,7 @@ export function formatPhoneNumber(phoneNumber: string) {
 
   return formattedPhoneNumber;
 }
+
+export function formatPhoneNumberForDatabase(phoneNumberValue: string) {
+  return phoneNumberValue.replace(/[()\-\s]/g, "");
+}

@@ -5,22 +5,24 @@ import { UseCase } from "@/domain/model/types";
 
 import { handleError } from "@/utils/common/fn/handleErrors";
 
-type Dependencies = {
-  readonly getContactsUseCase: UseCase<Contact[]>;
-};
-
-type Response = {
+export type ContactsListViewModelResponse = {
   contacts: Contact[];
   order: "asc" | "desc";
+  searchTerm: string;
   isLoading: boolean;
   hasError: boolean;
+  getContacts: () => Promise<void>;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
   toggleSortByName: () => void;
 };
 
+type Dependencies = {
+  readonly getContactsUseCase: UseCase<Contact[]>;
+};
+
 export const useContactsListViewModel = ({
   getContactsUseCase
-}: Dependencies): Response => {
+}: Dependencies): ContactsListViewModelResponse => {
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [order, setOrder] = useState<"asc" | "desc">("asc");
   const [searchTerm, setSearchTerm] = useState("");
@@ -34,18 +36,26 @@ export const useContactsListViewModel = ({
   const getContacts = useCallback(async () => {
     try {
       setIsLoading(true);
+
       const response = await getContactsUseCase.execute();
+
       setContacts(response);
+      setHasError(false);
     } catch (error) {
-      handleError(error);
       setHasError(true);
+      handleError(error);
     } finally {
       setIsLoading(false);
     }
   }, [getContactsUseCase]);
 
   useEffect(() => {
+    const controller = new AbortController();
     void getContacts();
+
+    return () => {
+      controller.abort();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -62,8 +72,10 @@ export const useContactsListViewModel = ({
   return {
     contacts: filteredContacts,
     order,
+    searchTerm,
     isLoading,
     hasError,
+    getContacts,
     setSearchTerm,
     toggleSortByName
   };

@@ -4,8 +4,10 @@ import { DI } from "@/di/ioc";
 import {
   Box,
   Button,
+  ContactNotFound,
   ContactTable,
   Container,
+  EmptyContactList,
   Flex,
   HasErrorComponent,
   Header,
@@ -14,39 +16,49 @@ import {
 
 import { ENDPOINTS } from "@/utils/common/constant/endpoints";
 import { sortContactsByName } from "@/utils/common/fn/sortContactsByName";
+import { ContactsListViewModelResponse } from "../view-models/homeViewModel";
 
 const HomeView = () => {
   const {
     contacts,
     order,
+    searchTerm,
     isLoading,
     hasError,
+    getContacts,
     setSearchTerm,
     toggleSortByName
-  } = DI.resolve("homeViewModel");
+  } = DI.resolve<ContactsListViewModelResponse>("homeViewModel");
 
   return (
     <Container>
       <Loader isLoading={isLoading} />
 
       <Box>
-        <Header hasSearchForm onSetSearchTerm={setSearchTerm} />
+        <Header
+          hasSearchForm={!hasError || contacts.length > 0}
+          onSetSearchTerm={setSearchTerm}
+        />
 
         <Flex
           align="center"
-          justify="space-between"
+          justify="center"
           style={{
             borderBottom: "1px solid #E6E6E6",
             paddingBottom: "1rem"
           }}
         >
-          <small>
-            <strong>
-              {contacts.length > 0 &&
-                `${String(contacts.length).padStart(2, "00")} contatos`}
-            </strong>
-          </small>
-
+          {!hasError && (
+            <small
+              style={{
+                flex: 1
+              }}
+            >
+              <strong>
+                {String(contacts.length).padStart(2, "00")} contatos
+              </strong>
+            </small>
+          )}
           <Link to={ENDPOINTS.NEW}>
             <Button size="small" variant="ghost" as="span">
               Novo contato
@@ -55,16 +67,25 @@ const HomeView = () => {
         </Flex>
 
         {!hasError ? (
-          <ContactTable
-            contacts={sortContactsByName({
-              contacts: [...contacts],
-              order
-            })}
-            order={order}
-            onSortByName={toggleSortByName}
-          />
+          <>
+            {contacts.length > 0 && (
+              <ContactTable
+                contacts={sortContactsByName({
+                  contacts: [...contacts],
+                  order
+                })}
+                order={order}
+                onSortByName={toggleSortByName}
+              />
+            )}
+
+            {contacts.length < 1 && !searchTerm && <EmptyContactList />}
+            {contacts.length < 1 && !!searchTerm && (
+              <ContactNotFound searchTerm={searchTerm} />
+            )}
+          </>
         ) : (
-          <HasErrorComponent />
+          <HasErrorComponent handleClick={getContacts} />
         )}
       </Box>
     </Container>

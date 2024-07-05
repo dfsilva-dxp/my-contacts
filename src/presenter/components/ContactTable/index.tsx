@@ -1,4 +1,4 @@
-import { AddressBook, CaretDown, CaretUp } from "phosphor-react";
+import { CaretDown, CaretUp } from "phosphor-react";
 
 import { Badge, DropdownMenu, Flex } from "@/presenter/components";
 
@@ -17,7 +17,7 @@ const ContactTable = ({
     <S.TableContainer>
       <Flex direction="column" align="stretch" gap="$4">
         <S.TableWrapper>
-          {contacts.length > 0 ? (
+          {contacts.length > 0 && (
             <S.Table>
               <thead>
                 <tr>
@@ -58,11 +58,6 @@ const ContactTable = ({
                 ))}
               </tbody>
             </S.Table>
-          ) : (
-            <S.ContactsNotFound>
-              <AddressBook size={64} />
-              <strong>Não foi encontrado nenhum contato.</strong>
-            </S.ContactsNotFound>
           )}
         </S.TableWrapper>
       </Flex>

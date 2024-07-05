@@ -1,16 +1,15 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button, Input, Select } from "@/presenter/components";
 
+import { formatPhoneNumberForDatabase } from "@/utils/common/fn/formatPhoneNumber";
+
 import * as S from "./styles";
 
-const options = [
-  { label: "Category I", value: "1" },
-  { label: "Category II", value: "2" },
-  { label: "Category III", value: "3" }
-];
+import { Category } from "@/domain/model/Categories";
 
 const contactFormSchema = z.object({
   name: z
@@ -18,11 +17,24 @@ const contactFormSchema = z.object({
     .min(3, { message: "O nome deve conter um mínimo de 3 letras." }),
   email: z.string().email("Este e-mail não é válido."),
   phone: z.string().min(12, { message: "Telefone inválido." }),
-  category: z.string().min(1, { message: "Selecione uma categoria." })
+  category_id: z.string().min(1, { message: "Selecione uma categoria." })
 });
 
 export type ContactFormData = z.infer<typeof contactFormSchema>;
-const Form = () => {
+
+type Dependencies = {
+  categories: Category[];
+  whenSubmit: ({
+    name,
+    email,
+    phone,
+    category_id
+  }: ContactFormData) => Promise<void>;
+};
+
+const Form = ({ whenSubmit, categories }: Dependencies) => {
+  const [key, setKey] = useState(+new Date());
+
   const {
     register,
     handleSubmit,
@@ -33,9 +45,13 @@ const Form = () => {
   });
 
   const onSubmit = async (data: ContactFormData) => {
-    // eslint-disable-next-line no-console
-    console.log(data);
+    const formatedData = {
+      ...data,
+      phone: formatPhoneNumberForDatabase(data.phone)
+    };
+    whenSubmit(formatedData);
     reset();
+    setKey(+new Date());
   };
 
   return (
@@ -64,12 +80,13 @@ const Form = () => {
           tabIndex={3}
         />
         <Select
-          options={options}
+          options={categories}
           selectLabel="Categorias"
-          errorMessage={errors.category && errors.category.message}
-          {...register("category")}
-          name={register("category").name}
-          onChange={register("category").onChange}
+          errorMessage={errors.category_id && errors.category_id.message}
+          {...register("category_id")}
+          name={register("category_id").name}
+          onChange={register("category_id").onChange}
+          key={key}
         />
         <Button
           type="submit"

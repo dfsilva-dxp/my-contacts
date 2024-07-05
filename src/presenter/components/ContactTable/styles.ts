@@ -61,12 +61,3 @@ export const Table = styled.table`
     }
   `}
 `;
-
-export const ContactsNotFound = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: ${theme.colors.gray[100]};
-  `}
-`;
