@@ -4,9 +4,12 @@ import { CaretDown, CaretUp, Check } from "phosphor-react";
 
 import * as S from "./styles";
 
-import { SelectElement, SelectProps } from "./types";
+import { SelectElement, SelectComponentProps } from "./types";
 
-const SelectInput: ForwardRefRenderFunction<SelectElement, SelectProps> = (
+const SelectInput: ForwardRefRenderFunction<
+  SelectElement,
+  SelectComponentProps
+> = (
   {
     placeholder = "Selecione uma categoria",
     errorMessage,
