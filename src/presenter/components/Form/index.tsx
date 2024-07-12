@@ -1,29 +1,29 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-import { Button, Input, Select } from "@/presenter/components";
+import { Button, Input, Loader, Select } from "@/presenter/components";
 
-import { formatPhoneNumberForDatabase } from "@/utils/common/fn/formatPhoneNumber";
+import { DI } from "@/di/ioc";
+
+import {
+  formatPhoneNumber,
+  formatPhoneNumberForDatabase
+} from "@/utils/common/fn/formatPhoneNumber";
 
 import * as S from "./styles";
 
-import { Category } from "@/domain/model/Categories";
+import { GetCategoriesViewModelResponse } from "@/presenter/containers/NewContact/view-models/getCategoriesViewModel";
 
-const contactFormSchema = z.object({
-  name: z
-    .string()
-    .min(3, { message: "O nome deve conter um mínimo de 3 letras." }),
-  email: z.string().email("Este e-mail não é válido."),
-  phone: z.string().min(12, { message: "Telefone inválido." }),
-  category_id: z.string().min(1, { message: "Selecione uma categoria." })
-});
+import {
+  ContactFormData,
+  useFormViewModel
+} from "@/presenter/containers/EditContact/view-models/useFormViewModel";
 
-export type ContactFormData = z.infer<typeof contactFormSchema>;
+import { Contact } from "@/domain/model/Contacts";
 
 type Dependencies = {
-  categories: Category[];
+  isLoading?: boolean;
+  onGetContactById?: (contactId: string) => Promise<Contact | undefined>;
   whenSubmit: ({
     name,
     email,
@@ -32,17 +32,21 @@ type Dependencies = {
   }: ContactFormData) => Promise<void>;
 };
 
-const Form = ({ whenSubmit, categories }: Dependencies) => {
+const Form = ({
+  isLoading = false,
+  onGetContactById,
+  whenSubmit
+}: Dependencies) => {
   const [key, setKey] = useState(+new Date());
+  const [contactId, setContactId] = useState<string | undefined>(undefined);
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isSubmitting, isValid }
-  } = useForm<ContactFormData>({
-    resolver: zodResolver(contactFormSchema)
-  });
+  const { id } = useParams();
+  const { register, handleSubmit, reset, errors, isSubmitting, isValid } =
+    useFormViewModel();
+
+  const { categories } = DI.resolve<GetCategoriesViewModelResponse>(
+    "getCategoriesViewModel"
+  );
 
   const onSubmit = async (data: ContactFormData) => {
     const formatedData = {
@@ -54,8 +58,28 @@ const Form = ({ whenSubmit, categories }: Dependencies) => {
     setKey(+new Date());
   };
 
+  useEffect(() => {
+    if (id) {
+      (async () => {
+        const response = onGetContactById && (await onGetContactById(id));
+
+        if (response) {
+          setContactId(() => response.category_id || undefined);
+          reset({
+            name: response.name,
+            email: response.email,
+            phone: formatPhoneNumber(response.phone),
+            category_id: response.category_id!
+          });
+        }
+      })();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
+
   return (
     <S.FormContent>
+      <Loader isLoading={isLoading} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
           label="Nome"
@@ -86,6 +110,7 @@ const Form = ({ whenSubmit, categories }: Dependencies) => {
           {...register("category_id")}
           name={register("category_id").name}
           onChange={register("category_id").onChange}
+          value={contactId}
           key={key}
         />
         <Button

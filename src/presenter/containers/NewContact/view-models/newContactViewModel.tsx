@@ -1,18 +1,15 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
+import { toast } from "react-toastify";
 
 import { handleError } from "@/utils/common/fn/handleErrors";
 
-import { Category } from "@/domain/model/Categories";
-import { UseCase, UseCaseWithParams } from "@/domain/model/types";
+import { UseCaseWithParams } from "@/domain/model/types";
 
 import { ContactResponse } from "@/domain/model/Contacts";
-import { ContactFormData } from "@/presenter/components/Form";
-import { toast } from "react-toastify";
+
+import { ContactFormData } from "../../EditContact/view-models/useFormViewModel";
 
 export type NewContactViewModelResponse = {
-  categories: Category[];
-  isLoading: boolean;
-  hasError: boolean;
   createContact: ({
     name,
     email,
@@ -22,7 +19,6 @@ export type NewContactViewModelResponse = {
 };
 
 type Dependencies = {
-  readonly getCategoriesUseCase: UseCase<Category[]>;
   readonly createContactUseCase: UseCaseWithParams<
     ContactResponse,
     ContactFormData
@@ -30,13 +26,8 @@ type Dependencies = {
 };
 
 export const useNewContactViewModel = ({
-  getCategoriesUseCase,
   createContactUseCase
 }: Dependencies): NewContactViewModelResponse => {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasError, setHasError] = useState(false);
-
   const createContact = useCallback(
     async ({ name, email, phone, category_id }: ContactFormData) => {
       try {
@@ -58,35 +49,5 @@ export const useNewContactViewModel = ({
     },
     [createContactUseCase]
   );
-
-  const getCategories = useCallback(async () => {
-    try {
-      setIsLoading(true);
-
-      const response = await getCategoriesUseCase.execute();
-
-      if (response.length > 0) {
-        setCategories(response);
-      }
-
-      setHasError(false);
-    } catch (error) {
-      setHasError(true);
-      handleError(error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [getCategoriesUseCase]);
-
-  useEffect(() => {
-    const controller = new AbortController();
-    void getCategories();
-
-    return () => {
-      controller.abort();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  return { categories, isLoading, hasError, createContact };
+  return { createContact };
 };

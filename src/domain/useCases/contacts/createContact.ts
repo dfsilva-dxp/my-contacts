@@ -1,7 +1,7 @@
 import { ContactResponse } from "@/domain/model/Contacts";
 import { UseCaseWithParams } from "@/domain/model/types";
 import { IContactsRepository } from "@/domain/repository/IContactsRepository";
-import { ContactFormData } from "@/presenter/components/Form";
+import { ContactFormData } from "@/presenter/containers/EditContact/view-models/useFormViewModel";
 
 type Dependencies = {
   readonly contactsRepository: IContactsRepository;

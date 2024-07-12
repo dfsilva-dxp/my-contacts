@@ -1,3 +1,4 @@
+import { ContactFormData } from "@/presenter/containers/EditContact/view-models/useFormViewModel";
 import { Id } from "./types";
 
 export interface Contact {
@@ -10,3 +11,8 @@ export interface Contact {
 }
 
 export type ContactResponse = Omit<Contact, "category_name">;
+
+export interface UpdateContactFormData {
+  readonly id: Id;
+  readonly formData: ContactFormData;
+}

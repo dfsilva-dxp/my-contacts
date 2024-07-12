@@ -1,23 +1,7 @@
-import {
-  Box,
-  Breadcrumb,
-  Container,
-  Form,
-  Header
-} from "@/presenter/components";
-
-import { ENDPOINTS } from "@/utils/common/constant/endpoints";
+import EditContactView from "../containers/EditContact/views/editContactView";
 
 const EditContactPage = () => {
-  return (
-    <Container>
-      <Box>
-        <Header />
-        <Breadcrumb title="Editar Daniel Silva" url={ENDPOINTS.HOME} />
-        <Form />
-      </Box>
-    </Container>
-  );
+  return <EditContactView />;
 };
 
 export default EditContactPage;
