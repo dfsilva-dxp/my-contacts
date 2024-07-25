@@ -1,18 +1,9 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-
+import { forwardRef, ForwardRefRenderFunction, useState } from "react";
 import { Button, Input, Loader, Select } from "@/presenter/components";
 
-import { DI } from "@/di/ioc";
-
-import {
-  formatPhoneNumber,
-  formatPhoneNumberForDatabase
-} from "@/utils/common/fn/formatPhoneNumber";
+import { formatPhoneNumberForDatabase } from "@/utils/common/fn/formatPhoneNumber";
 
 import * as S from "./styles";
-
-import { GetCategoriesViewModelResponse } from "@/presenter/containers/NewContact/view-models/getCategoriesViewModel";
 
 import {
   ContactFormData,
@@ -23,7 +14,6 @@ import { Contact } from "@/domain/model/Contacts";
 
 type Dependencies = {
   isLoading?: boolean;
-  onGetContactById?: (contactId: string) => Promise<Contact | undefined>;
   whenSubmit: ({
     name,
     email,
@@ -32,21 +22,26 @@ type Dependencies = {
   }: ContactFormData) => Promise<void>;
 };
 
-const Form = ({
-  isLoading = false,
-  onGetContactById,
-  whenSubmit
-}: Dependencies) => {
+export type FormHandle = {
+  resetFormData: (contact: Contact | undefined) => void;
+};
+
+const Form: ForwardRefRenderFunction<FormHandle, Dependencies> = (
+  { isLoading = false, whenSubmit },
+  ref
+) => {
   const [key, setKey] = useState(+new Date());
-  const [contactId, setContactId] = useState<string | undefined>(undefined);
 
-  const { id } = useParams();
-  const { register, handleSubmit, reset, errors, isSubmitting, isValid } =
-    useFormViewModel();
-
-  const { categories } = DI.resolve<GetCategoriesViewModelResponse>(
-    "getCategoriesViewModel"
-  );
+  const {
+    categoryId,
+    categories,
+    register,
+    handleSubmit,
+    reset,
+    errors,
+    isSubmitting,
+    isValid
+  } = useFormViewModel({ ref });
 
   const onSubmit = async (data: ContactFormData) => {
     const formatedData = {
@@ -57,25 +52,6 @@ const Form = ({
     reset();
     setKey(+new Date());
   };
-
-  useEffect(() => {
-    if (id) {
-      (async () => {
-        const response = onGetContactById && (await onGetContactById(id));
-
-        if (response) {
-          setContactId(() => response.category_id || undefined);
-          reset({
-            name: response.name,
-            email: response.email,
-            phone: formatPhoneNumber(response.phone),
-            category_id: response.category_id!
-          });
-        }
-      })();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
 
   return (
     <S.FormContent>
@@ -110,7 +86,7 @@ const Form = ({
           {...register("category_id")}
           name={register("category_id").name}
           onChange={register("category_id").onChange}
-          value={contactId}
+          value={categoryId || undefined}
           key={key}
         />
         <Button
@@ -126,4 +102,4 @@ const Form = ({
   );
 };
 
-export default Form;
+export default forwardRef(Form);

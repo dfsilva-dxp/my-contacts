@@ -1,6 +1,16 @@
+import { ForwardedRef, useImperativeHandle, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import { DI } from "@/di/ioc";
+
+import { Contact } from "@/domain/model/Contacts";
+
+import { formatPhoneNumber } from "@/utils/common/fn/formatPhoneNumber";
+
+import { GetCategoriesViewModelResponse } from "../../NewContact/view-models/getCategoriesViewModel";
+import { FormHandle } from "@/presenter/components/Form";
 
 const contactFormSchema = z.object({
   name: z
@@ -13,7 +23,17 @@ const contactFormSchema = z.object({
 
 export type ContactFormData = z.infer<typeof contactFormSchema>;
 
-export const useFormViewModel = () => {
+type Dependencies = {
+  ref: ForwardedRef<FormHandle>;
+};
+
+export const useFormViewModel = ({ ref }: Dependencies) => {
+  const [categoryId, setCategoryId] = useState<string | null>("");
+
+  const { categories } = DI.resolve<GetCategoriesViewModelResponse>(
+    "getCategoriesViewModel"
+  );
+
   const {
     register,
     handleSubmit,
@@ -23,5 +43,30 @@ export const useFormViewModel = () => {
     resolver: zodResolver(contactFormSchema)
   });
 
-  return { register, handleSubmit, reset, errors, isSubmitting, isValid };
+  useImperativeHandle(
+    ref,
+    () => ({
+      resetFormData: (contact: Contact | undefined) => {
+        reset({
+          name: contact?.name,
+          email: contact?.email,
+          phone: formatPhoneNumber(contact!.phone),
+          category_id: contact!.category_id!
+        });
+        setCategoryId(contact!.category_id);
+      }
+    }),
+    [reset]
+  );
+
+  return {
+    categoryId,
+    categories,
+    register,
+    handleSubmit,
+    reset,
+    errors,
+    isSubmitting,
+    isValid
+  };
 };
