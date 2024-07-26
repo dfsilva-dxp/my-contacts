@@ -63,7 +63,10 @@ const EditContactView = () => {
     <Container>
       <Box>
         <Header />
-        <Breadcrumb title={`Editar ${contact?.name}`} url={ENDPOINTS.HOME} />
+        <Breadcrumb
+          title={contact?.name ? `Editar ${contact?.name}` : "carregando..."}
+          url={ENDPOINTS.HOME}
+        />
         <Form whenSubmit={onSubmit} isLoading={isLoading} ref={formRef} />
       </Box>
     </Container>
