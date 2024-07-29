@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { toast } from "react-toastify";
 
 import { Contact } from "@/domain/model/Contacts";
-import { UseCase } from "@/domain/model/types";
+import { Id, UseCase, UseCaseWithParams } from "@/domain/model/types";
 
 import { handleError } from "@/utils/common/fn/handleErrors";
 
@@ -12,16 +13,19 @@ export type ContactsListViewModelResponse = {
   isLoading: boolean;
   hasError: boolean;
   getContacts: () => Promise<void>;
+  deleteContact: (contactId: Id) => Promise<void>;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
   toggleSortByName: () => void;
 };
 
 type Dependencies = {
   readonly getContactsUseCase: UseCase<Contact[]>;
+  readonly deleteContactUseCase: UseCaseWithParams<Contact[], Id>;
 };
 
 export const useContactsListViewModel = ({
-  getContactsUseCase
+  getContactsUseCase,
+  deleteContactUseCase
 }: Dependencies): ContactsListViewModelResponse => {
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [order, setOrder] = useState<"asc" | "desc">("asc");
@@ -48,6 +52,20 @@ export const useContactsListViewModel = ({
       setIsLoading(false);
     }
   }, [getContactsUseCase]);
+
+  const deleteContact = useCallback(
+    async (contactId: Id) => {
+      try {
+        const response = await deleteContactUseCase.execute(contactId);
+        setContacts(() => response);
+        toast.success("Contato deletado com sucesso.");
+      } catch (error) {
+        setHasError(true);
+        handleError(error);
+      }
+    },
+    [deleteContactUseCase]
+  );
 
   useEffect(() => {
     const controller = new AbortController();
@@ -76,6 +94,7 @@ export const useContactsListViewModel = ({
     isLoading,
     hasError,
     getContacts,
+    deleteContact,
     setSearchTerm,
     toggleSortByName
   };

@@ -4,10 +4,11 @@ import {
   ContactResponse,
   UpdateContactFormData
 } from "../model/Contacts";
+import { Id } from "../model/types";
 
 export type IContactsDataSource = {
   readonly getAll: () => Promise<Contact[]>;
-  readonly getOne: (contactId: string) => Promise<Contact>;
+  readonly getOne: (contactId: Id) => Promise<Contact>;
   readonly create: ({
     name,
     email,
@@ -18,4 +19,5 @@ export type IContactsDataSource = {
     id,
     formData
   }: UpdateContactFormData) => Promise<ContactResponse>;
+  readonly deleteOne: (contactId: Id) => Promise<Contact[]>;
 };
