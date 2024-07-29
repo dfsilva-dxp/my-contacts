@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import {
@@ -11,14 +11,18 @@ import {
 
 import { DI } from "@/di/ioc";
 
+import { ENDPOINTS } from "@/utils/common/constant/endpoints";
+
 import { GetContactViewModelResponse } from "../view-models/getContactViewModel";
 import { UpdateContactViewModelResponse } from "../view-models/useUpdateContactViewModel";
 import { ContactFormData } from "../view-models/useFormViewModel";
 
-import { ENDPOINTS } from "@/utils/common/constant/endpoints";
+import { Contact } from "@/domain/model/Contacts";
+import { FormHandle } from "@/presenter/components/Form";
 
 const EditContactView = () => {
-  const [contactName, setContactName] = useState<string | undefined>(undefined);
+  const [contact, setContact] = useState<Contact | undefined>(undefined);
+  const formRef = useRef<FormHandle>(null);
   const { id } = useParams();
 
   const { getContactById, isLoading } = DI.resolve<GetContactViewModelResponse>(
@@ -48,7 +52,8 @@ const EditContactView = () => {
       (async () => {
         const response = await getContactById(id);
 
-        setContactName(response?.name);
+        setContact(response);
+        formRef?.current?.resetFormData(response);
       })();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -58,12 +63,11 @@ const EditContactView = () => {
     <Container>
       <Box>
         <Header />
-        <Breadcrumb title={`Editar ${contactName}`} url={ENDPOINTS.HOME} />
-        <Form
-          whenSubmit={onSubmit}
-          onGetContactById={getContactById}
-          isLoading={isLoading}
+        <Breadcrumb
+          title={contact?.name ? `Editar ${contact?.name}` : "carregando..."}
+          url={ENDPOINTS.HOME}
         />
+        <Form whenSubmit={onSubmit} isLoading={isLoading} ref={formRef} />
       </Box>
     </Container>
   );

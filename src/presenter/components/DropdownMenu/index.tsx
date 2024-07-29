@@ -12,7 +12,11 @@ import * as S from "./styles";
 import { IDropdownMenuProps } from "./types";
 import { useState } from "react";
 
-const DropdownMenu = ({ contact_id, contact_name }: IDropdownMenuProps) => {
+const DropdownMenu = ({
+  contact_id,
+  contact_name,
+  onDeleteContact
+}: IDropdownMenuProps) => {
   const [openModal, setOpenModal] = useState(false);
 
   function toggleModal() {
@@ -53,7 +57,11 @@ const DropdownMenu = ({ contact_id, contact_name }: IDropdownMenuProps) => {
         open={openModal}
         onOpenChange={() => setOpenModal((prevState) => !prevState)}
       >
-        <Modal danger contact_name={contact_name} />
+        <Modal
+          danger
+          contact_name={contact_name}
+          onDeleteContact={() => onDeleteContact && onDeleteContact(contact_id)}
+        />
       </Dialog.Root>
     </>
   );

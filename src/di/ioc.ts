@@ -11,6 +11,7 @@ import { useUpdateContactViewModel } from "@/presenter/containers/EditContact/vi
 import * as ContactsDataSource from "@/data/data-source/contactsDataSource";
 import { getContactsUseCase } from "@/domain/useCases/contacts/getContacts";
 import { getContactUseCase } from "@/domain/useCases/contacts/getContact";
+import { deleteContactUseCase } from "@/domain/useCases/contacts/deleteContact";
 import { createContactUseCase } from "@/domain/useCases/contacts/createContact";
 import { updateContactUseCase } from "@/domain/useCases/contacts/updateContact";
 
@@ -39,6 +40,7 @@ container.register({
 
   getContactsUseCase: asFunction(getContactsUseCase),
   getContactUseCase: asFunction(getContactUseCase),
+  deleteContactUseCase: asFunction(deleteContactUseCase),
   createContactUseCase: asFunction(createContactUseCase),
   updateContactUseCase: asFunction(updateContactUseCase),
   getCategoriesUseCase: asFunction(getCategoriesUseCase)

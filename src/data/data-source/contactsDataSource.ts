@@ -8,13 +8,14 @@ import { axios } from "@/utils/common/services/axiosInstace";
 import { PATHS } from "@/utils/common/constant/paths";
 
 import { ContactFormData } from "@/presenter/containers/EditContact/view-models/useFormViewModel";
+import { Id } from "@/domain/model/types";
 
 export async function getAll(): Promise<Contact[]> {
   const { data } = await axios.get<Contact[]>(PATHS.CONTACTS);
   return data;
 }
 
-export async function getOne(contactId: string): Promise<Contact> {
+export async function getOne(contactId: Id): Promise<Contact> {
   const { data } = await axios.get<Contact>(`${PATHS.CONTACTS}/${contactId}`);
   return data;
 }
@@ -41,4 +42,14 @@ export async function updateOne({
     JSON.stringify(formData)
   );
   return data;
+}
+
+export async function deleteOne(contactId: Id): Promise<Contact[]> {
+  const { data } = await axios.delete(`${PATHS.CONTACTS}/${contactId}`);
+
+  if (data.status === "deleted") {
+    return getAll();
+  }
+
+  return [];
 }

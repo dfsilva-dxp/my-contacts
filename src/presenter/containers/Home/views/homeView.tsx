@@ -26,6 +26,7 @@ const HomeView = () => {
     isLoading,
     hasError,
     getContacts,
+    deleteContact,
     setSearchTerm,
     toggleSortByName
   } = DI.resolve<ContactsListViewModelResponse>("homeViewModel");
@@ -76,6 +77,7 @@ const HomeView = () => {
                 })}
                 order={order}
                 onSortByName={toggleSortByName}
+                onDeleteContact={deleteContact}
               />
             )}
 

@@ -11,7 +11,8 @@ import { IContactTableProps } from "./types";
 const ContactTable = ({
   contacts,
   order,
-  onSortByName
+  onSortByName,
+  onDeleteContact
 }: IContactTableProps) => {
   return (
     <S.TableContainer>
@@ -52,6 +53,7 @@ const ContactTable = ({
                       <DropdownMenu
                         contact_id={contact.id}
                         contact_name={contact.name}
+                        onDeleteContact={onDeleteContact}
                       />
                     </td>
                   </tr>

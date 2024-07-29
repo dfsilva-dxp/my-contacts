@@ -7,7 +7,11 @@ import * as S from "./styles";
 
 import { IModalProps } from "./types";
 
-const Modal = ({ danger = false, contact_name }: IModalProps) => {
+const Modal = ({
+  danger = false,
+  contact_name,
+  onDeleteContact
+}: IModalProps) => {
   return (
     <Dialog.Portal>
       <S.DialogOverlay />
@@ -36,7 +40,12 @@ const Modal = ({ danger = false, contact_name }: IModalProps) => {
               <Button variant="neutral">Cancelar</Button>
             </Dialog.Close>
 
-            <Button variant={danger ? "danger" : "primary"}>Deletar</Button>
+            <Button
+              variant={danger ? "danger" : "primary"}
+              onClick={onDeleteContact}
+            >
+              Deletar
+            </Button>
           </Flex>
         </Flex>
       </S.DialogContent>
