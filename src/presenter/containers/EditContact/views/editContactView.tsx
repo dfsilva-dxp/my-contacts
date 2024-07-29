@@ -48,6 +48,7 @@ const EditContactView = () => {
   };
 
   useEffect(() => {
+    const controller = new AbortController();
     if (id) {
       (async () => {
         const response = await getContactById(id);
@@ -56,8 +57,12 @@ const EditContactView = () => {
         formRef?.current?.resetFormData(response);
       })();
     }
+
+    return () => {
+      controller.abort();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id]);
 
   return (
     <Container>
